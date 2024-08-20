@@ -1,0 +1,137 @@
+import { FC, useEffect } from "react";
+import styles from "@/src/pages/Agreement/agreement.module.css";
+import { IonContent, IonItem, IonList, IonButton, IonIcon, IonPage } from "@ionic/react";
+import { chevronForward } from "ionicons/icons";
+import IonHeaderComponent from "@/src/components/Header/IonHeaderComponent";
+import RHForm from "@/src/components/RHForm";
+import { z } from "zod";
+import SubmitButton from "@/src/components/SubmitButton";
+import { useHistory } from "react-router-dom";
+import { CheckAll, Email, Marketing, Privacy, Sms, Terms } from "../../src/pages/Auth/Register/_components/CheckBoxes";
+import { useFormContext } from "react-hook-form";
+
+// zod 를 이용한 schema 생성
+  // 필드, 해당 필드의 타입, 유효성 검사를 추가 
+const schema = z.object({
+  checkAll: z.boolean().optional(),
+
+  terms: z.boolean().superRefine((valid, ctx) => {
+    if (!valid) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["terms"],
+        message: "필수값입니다.",
+      });
+    }
+  }),
+  /*  superRefine 이 뭐지? 
+      1) valid : terms 필드의 true/false 값을 valid 가 갖고 있음 
+      2) ctx : zod 에서 제공하는 context 객체
+        - context 란? 어떤 의미❓ contextAPI 의 그 context 인가❓
+        - addIssue 이게 뭐지? 이거는 또, 써봐야 알 것 같은데 
+      3) addIssue 
+        - a) terms 필드의 유효성이 false 인 경우 ex) 동의를 못 받은 경우 -> valid 는 false 
+        - b) context 객체에 이슈를 추가한다. (ctx.addIssue 를 활용해서) 
+        - c) 이슈에 뭘 추가하냐? 
+          - code : zod 에서 제공하는 이슈 코드 | 1) zod 상 '내장된 이슈 코드' 가 존재함 2) 다만, 사용자가 custom 할 수도 있음. 
+            3) 실제로 invalid_arguments 에러 인데, too_small 로 표기를 해두었을 수도 있음. -> 맞나❓❓
+          - path : 이슈가 발생한 필드 | 여기에서 필드란 schema 에 정의된 것 중 하나
+          - message : 이슈 메시지 | ❓ 이 메시지가 사용자에게 보여지는 건가? 
+        - d) 이슈를 추가하면 어떻게 되나?
+        - e) 이슈를 없애면 어떻게 되나? 
+        - f) 다른 프로젝트에서 사용한다면? 
+        
+  */
+
+  privacy: z.boolean().superRefine((valid, ctx) => {
+    if (!valid) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["terms"],
+        message: "필수값입니다.",
+      });
+    }
+  }),
+  marketing: z.boolean().optional(),
+  email: z.boolean().optional(),
+  sms: z.boolean().optional(),
+});
+
+// zod 가 schema 에서 type 을 뽑아줌 
+export type AgreementFormType = z.infer<typeof schema>;
+
+const Trigger = () => {
+  const { trigger } = useFormContext();
+  useEffect(() => {
+    trigger();
+  }, [trigger]);
+
+  return null;
+};
+
+const AgreementPage: FC = () => {
+  const history = useHistory();
+  const handlechevronClick = (key: string) => history.push(`/agreement/${key}`);
+  return (
+    <IonPage>
+      <IonHeaderComponent title="약관 동의" />
+      <IonContent>
+        <RHForm<AgreementFormType>
+          schema={schema}
+          defaultValues={{
+            checkAll: false,
+            terms: false,
+            privacy: false,
+            marketing: false,
+            email: false,
+            sms: false,
+          }}
+          onValid={() => history.push("/register/info?agreement=y")}
+        >
+          <Trigger />
+          <IonList>
+            <IonItem className={styles.allAgree}>
+              <CheckAll />
+            </IonItem>
+
+            <IonItem lines="none">
+              <Terms />
+              <IonButton onClick={() => handlechevronClick("terms")} fill="clear">
+                <IonIcon color="medium" icon={chevronForward} />
+              </IonButton>
+            </IonItem>
+
+            <IonItem lines="none">
+              <Privacy />
+              <IonButton onClick={() => handlechevronClick("privacy")} fill="clear">
+                <IonIcon color="medium" icon={chevronForward} />
+              </IonButton>
+            </IonItem>
+
+            <IonItem lines="none">
+              <Marketing />
+              <IonButton onClick={() => handlechevronClick("marketing")} fill="clear">
+                <IonIcon color="medium" icon={chevronForward} />
+              </IonButton>
+            </IonItem>
+
+            <IonItem lines="none">
+              <Email />
+              <Sms />
+            </IonItem>
+          </IonList>
+          <SubmitButton
+            classNames={{
+              valid: styles.confirmButtonAble,
+              invalid: styles.confirmButtonDisabled,
+            }}
+          >
+            확인
+          </SubmitButton>
+        </RHForm>
+      </IonContent>
+    </IonPage>
+  );
+};
+
+export default AgreementPage;
