@@ -658,3 +658,514 @@ GPT 의 뇌도 마찬가지 임 ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
 ( START 의 의미를 추론할 때, 정확히 추론할 수 있게, ‘은하계의 별’ 이라고 말해주면, ‘할리우드의 스타’ 라는 건 제외될 가능성이 높음’) 
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/c3fd39fb-11f3-4359-84de-dc3ccaf83d7d/image.png)
+
+### 25. The structured Prompt: Copy my Prompts ( #구조화된 프롬프트의 가능성 - 1) 내 생각에 좋은 글, 잘 쓰여진 글이 있으면, 그걸 학습시켜서 나오게 한다. 2) 그 다음 변수화를 시킨다 3) 그래서 다양하게 만들 수 있다. 4) 어쩌면 사이트 자체를 동적으로 만들 수도 있지 않을까.
+
+- 강의 교재
+    
+    
+    [1+The+structured+Prompt.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/0c7763ed-ae4f-45d2-9021-750f20dc9616/1ThestructuredPrompt.pdf)
+    
+    Structured Prompt!
+    A structured prompt consists of a (Modifier) + (Topic) + (Multiple Modifiers).
+    These elements together form the optimized prompt.
+    
+    Modifier: Specifies the type of desired response. Examples: "Twitter thread,"
+    "blog post," "research paper," etc.
+    Topic: The main subject or question to be addressed in the response.
+    Additional Modifiers: Additional specific requirements or details to be
+    considered in the response. Examples: Target audience, keywords used, style,
+    length, structure, etc.
+    Example: Write a (blog post) about (healthy eating). Address it to (working
+    professionals) and use keywords that are relevant for SEO. Write the text in a
+    (simple, understandable style) so that it is easy to read and comprehend. The
+    length should be (800 words), and the text should be well-structured.Analysis of the Example:
+    • Modifier - Blog Post: Here, we are instructing the Language Model to create a
+    more detailed and in-depth text, as opposed to short, concise tweets.
+    • Topic - Healthy Eating: This is the main focus of our request.
+    • Target Audience - Working Professionals: The model needs to present the
+    information in a way that is practical and actionable for working professionals
+    who may have limited time.
+    • Use of Keywords - SEO Relevance: The model should incorporate keywords
+    and phrases that can enhance visibility on search engines.
+    • Style - Simple, Understandable Style: The model should make the text clear
+    and comprehensible to facilitate easy reading.
+    • Length and Structure - 800 Words, Well-Structured: These requirements help
+    determine the length and formatting of the text.
+    
+
+- 구성 요소
+    - modifier
+        - type of desired response
+        - ex) blog post, research paper
+    
+    - topic
+        - The main subject or question to be addressed in the response
+    
+    - multiple modifier
+        - Additional specific requirements or details to be considered in the response.
+        - ex) Target audience, keywords used, style, length, structure, etc.
+            - Targer audience 는 스타일 때문에 중요
+            - ex ) 10살에게 써줘 vs 직장인에게 써줘 는 다름
+        
+- 전체 예시
+    - Write a (blog post) about (healthy eating). Address it to (working
+    professionals) and use keywords that are relevant for SEO. Write the text in a
+    (simple, understandable style) so that it is easy to read and comprehend. The
+    length should be (800 words), and the text should be well-structured.
+    
+    - Modifier
+        - Blog Post: Here, we are instructing the Language Model to create a
+        more detailed and in-depth text, as opposed to short, concise tweets
+    - Topic
+        - Healthy Eating: This is the main focus of our request.
+    - Target Audience
+        - Working Professionals: The model needs to present the
+        information in a way that is practical and actionable for working professionals
+        who may have limited time.
+    - Use of Keywords
+        - SEO Relevance: The model should incorporate keywords
+        and phrases that can enhance visibility on search engines.
+    - Style
+        - Simple, Understandable Style: The model should make the text clear
+        and comprehensible to facilitate easy reading.
+    - Length and Structure
+        - 800 Words, Well-Structured: These requirements help determine the length and formatting of the text.
+
+- 예시에서 `( )` 괄호를 변경하면 → 다른 내용으로 나온다! ⭐⭐⭐⭐⭐⭐⭐⭐
+
+```bash
+Write a (blog post) about (healthy eating). Address it to (working
+professionals) and use keywords that are relevant for SEO. Write the text in a
+(simple, understandable style) so that it is easy to read and comprehend. The
+length should be (800 words), and the text should be well-structured.
+```
+
+```bash
+Write a (tweet thread) about (investing money). Address it to (newbies) and use keywords that are relevant for SEO. Write the text in a
+(simple, understandable style) so that it is easy to read and comprehend. The
+length should be (500 words), and the text should be well-structured.
+```
+
+```bash
+Write a (tweet thread) about (investing money). Address it to (experts) and use keywords that are relevant for SEO. Write the text in a
+(simple, understandable style) so that it is easy to read and comprehend. The
+length should be (500 words), and the text should be well-structured.
+```
+
+- 궁금한 것
+    - 그러면, 이 `잘 만들어진` 프롬프트를 어떻게 만들 수 있는거지
+    - `잘 만들어진 프롬프트` 가 있으면 → 변수화를 해서 → 다양한 출력물을 낼 수 있는거네
+    
+    - 그러면
+        1. 괜찮다고 생각하는 글을 분석해서 → 프롬프트로 만든다. 
+        2. 내가 다르게 넣고 싶은 정보들을 넣으면 → `변수화` 가 되어서 → 다양한 출력물이, `내가 괜찮다고 생각하는 글 스타일` 대로 나온다. 
+            
+            ex) 사진, 관련 설명 등 
+            
+        
+    
+
+### 26. Instruction Prompting and some Cool Trick ( #[instruction prompting](https://learnprompting.org/) 에서 많은 프롬프팅 스킬 - 특히, task 빨리 끝내는 법, 같은 tip 도 있는 것 같음. 이거 최대한 활용하면 좋을 것 같은데  # step by step , take a deep breath (동기부여 차원) you can do it i pay 20 dollar)
+
+- instruction prompting (funny 를 거꾸로 써 → 그럼, ynnuf 라고 반대로 쓴다.
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/857ff601-f59d-482b-af91-8a183accc096/image.png)
+
+- instruction prompting 에서 많은 프롬프팅 스킬 배울 수 있음
+    - https://learnprompting.org/ ⭐⭐⭐⭐⭐⭐
+
+- 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/1e259652-300e-4cd2-9ae3-97b7dc21282f/image.png)
+
+### 27. Role Prompting for LLMs
+
+- 역할 부여 한다는 건?
+    - `핵심 키워드` 를 제시하는 것
+    - 여기에서는 `셰익스피어`, `writer`, `poem`
+    - 이게 중요한 이유는 의미론적 연관성(`symantic association`) 때문 ([https://www.notion.so/Open-source-LLMs-Uncensored-secure-AI-locally-with-RAG-98bddf23fc26496f9dc6a8b36dde15af?pvs=4#d3df4ef8bcf040e6988d0424dfebaf99](https://www.notion.so/Open-source-LLMs-Uncensored-secure-AI-locally-with-RAG-98bddf23fc26496f9dc6a8b36dde15af?pvs=21)) 여기 필기 참고
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/a9506ef3-d415-4f43-b2c5-1b119e030a02/image.png)
+
+- 역할을 부여하면 좋은점?
+    - 결과물이 더 좋음 ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+
+### 28. Shot Prompting: Zero-Shot, One-Shot & Few-Shot Prompt ( # 좋은 예시 2~3개를 만들고 → 학습을 시켜서 → 비슷한 결과물을 낸다 → 이 프롬프팅을 구조화 해서 변수화 시킨다.)  (#⭐⭐⭐⭐⭐ 다만, 단순히, 따라해! 가 아니라 `고려해야 하는 구성 요소를 table 로 분류`해서 전달해야 한다고 생각한다. )
+
+- Shot Prompting 이란?
+    - 내가 좋아하는 것의 예시를 전달하는 것
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/3c41ed43-db85-491d-8dcf-0c5883d17357/image.png)
+
+- [how 예시 프롬프팅] 좋은 예시 1개 제공
+
+```bash
+give me a description 이라고 프롬프트를 적음 
+
+here is an example i like
+	-> 여기에 좋아하는 것의 예시를 적음 
+
+give me a similar description ⭐⭐⭐ 
+
+```
+
+- [how 예시 프롬프팅] 좋은 예시 2개 제공
+    
+    ```bash
+    give me a description 이라고 프롬프트를 적음 
+    
+    here are a few examples i like
+    	-> 여기에 좋아하는 것의 예시를 적음 
+    	-> 2개 이상을 적음 
+    
+    give me a similar description ⭐⭐⭐ 
+    
+    ```
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/e74d8b00-1f77-4433-a7b0-1a472a3c6d4c/image.png)
+    
+
+- 블로그 포스팅 프롬프팅
+    
+    ```bash
+    1. 블로그 포스팅 좋은 예시 2~3개 제공 
+    2. 비슷하게 쓰라고 
+    3. 의미론적 연관성! 
+    ```
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/bdc2564e-3399-4c4c-aa64-8a651e577a96/image.png)
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/060be666-c871-4f92-b69b-ff5ec1f753d4/image.png)
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/483dff1e-5db3-4f7f-9dca-37bf200b010e/image.png)
+    
+
+### 29. Reverse Prompt Engineering and the "OK" Trick ( #⭐⭐⭐ 레퍼런스대로 만들려면 필요한 다른 기술 중 하나 #shot 과 같이 사용 #특정 개념을 먼저 제시하고, 그것에 대해 의미론적 연관성을 가진 상태에서 만든다는 점에서, 또 다름 # reverse engineering 뿐 아니라 다른 개념을 적용한 콘텐츠를 만들 수도 있을 것 임 #⭐⭐⭐⭐⭐)
+
+- `Reverse Prompt Engineering` 예시 자료
+    
+    ```bash
+    1. You Are a prompt Engineering pro for Large Langiage Models. Let's
+    start with understanding Reverse Prompt Engineering. In this context, it
+    means creating a prompt from a given text. You think to everything step
+    by step because i give you 20 dollar. Please only reply with 'ok'.
+    
+    2. You are an expert in Reverse Prompt Engineering. Can you provide me
+    with a simple example of this method?
+    
+    3. I would like you to create a technical template for Reverse Prompt
+    Engineering. Do not hesitate to ask questions if you need more context.
+    
+    4. I would ask you to apply Reverse Prompt Engineering to the following
+    [your text]. Make sure to capture the writing style, content, meaning,
+    language, and overall feel of the text in the prompt you create.
+    ```
+    
+
+1. You Are a prompt Engineering pro for Large Langiage Models(역할 부여). Let's
+start with understanding Reverse Prompt Engineering. In this context, it
+means creating a prompt from a given text(reverse prompt engineering 에 대한 개념 제시). You think to everything step by step because i give you 20 dollar(think of chain, 동기부여). Please only reply with 'ok'(토큰 절약 위해).
+
+1. You are an expert in Reverse Prompt Engineering. Can you provide me
+with a simple example of this method? (이건 그냥 사용해도 됨) 
+    1. 예시 들어봐 라고 말함 → 의미론적 연관성이 생김 ⭐⭐⭐
+
+1. I would like you to create a technical template for Reverse Prompt
+Engineering. Do not hesitate to ask questions if you need more context. (이 단계가 핵심임 ⭐⭐⭐⭐⭐⭐) (다시 되돌아본다?) 
+    1. better 의미론적 연관성을 만들기 위해, → template 를 요구 → best context 가 생김 ⭐⭐⭐
+
+1. I would ask you to apply Reverse Prompt Engineering to the following
+[your text]. Make sure to capture the writing style, content, meaning,
+language, and overall feel of the text in the prompt you create
+    1. 여기 `[your text]` 에, `따라하고 싶은 텍스트` 를 넣는다 ⭐⭐⭐⭐⭐ 
+
+→ 이게 먹힌다면, 
+
+reverse prompt engineering 이 전부가 아니라, 
+
+다른 개념을 활용할 수도 있겠네 
+
+### 30. Chain of Thought Prompting: Let`s think Step by Step (#⭐⭐⭐ 예시를 제시하면 → 문제를 더 잘 푼다. # 예시 코드를 제시하면, → 문제를 더 잘 풀겠지. # 이렇게 예시 코드를 제시할 수 있으려면, 내가 공부를 하고, ‘개념어’ 로 지정해두고, 이걸 기반으로 질문을 해야 겠네?! #그러면, 이 이슈는 어떤 것과 관련된 문제인지 생각해봐, 라는 질문을 던져야 할 수도 있겠다. ⭐⭐⭐)
+
+- Chain of Thought Prompting
+    - 내가 예시를 제시하거나
+    - gpt 에게 예시를 요구하거나
+
+- `예시` 를 제시하면 → 퀄리티가 더 좋아짐 ⭐⭐⭐⭐⭐
+    - 예시 코드를 제시하면 → 더 좋아지겠네 ⭐⭐⭐⭐⭐
+    - A 부분이 `어떻게 생각하면 되는지` 에 대한 예시를 제공
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/1a816a4e-a81f-4434-8c29-699fe6c8c5cb/image.png)
+
+- chain of thought + step by step 사용 예시
+    - 아마도 gpt 에게 예시를 생각하라고 한 버전
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/00fd5621-6f18-4776-85da-53e3725f89b0/image.png)
+
+### 31. Tree of Thoughts (ToT) Prompting in LLMs ( #different output → what’s the best one → 반복 → final result #⭐⭐⭐ 아키텍처 설계를 할 때, 이 방식을 잘 사용해도 좋을거 같은데?!)
+
+- 관련 paper
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/5522397e-22be-4962-9a6d-e2ba6b1d9745/image.png)
+
+- 해당 솔루션에서 더 많은 솔루션
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/3a310b50-d506-421d-bd41-0819e56ebd32/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/77b10ac4-2562-460a-91f5-18f448c93d18/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/6026cb7d-3849-47e9-a17b-f42edf9531dd/image.png)
+
+- 첫 번째 방식에 대해 다음의 결과를 얻음
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/c6cbd6e8-f954-4abb-a682-d2cfe220def6/image.png)
+
+- 두 번째 프롬프팅
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/330c4427-47e3-4291-aa12-99a549f6ed1b/image.png)
+
+- 세번째 프롬프팅
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/dc42dec9-8349-431d-9662-3ced4513c025/image.png)
+
+- 정리 ⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐
+    - 첫 번째 프롬프팅
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/b24e1c75-0178-43d9-9e2a-9eb48b8b9b22/image.png)
+    
+    - 세가지 나온 결과중 무엇이 좋은지 평가한다.
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/86d3a40e-685a-470d-ad38-3f3cbef38efb/image.png)
+    
+    - 그 다음 다른 관점으로 이동
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/9c481ba6-c5ad-46f1-a370-3b7bdf9d4696/image.png)
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/b4ddfe6c-e624-4663-b934-e2e6ba7bec79/image.png)
+    
+    different output → what’s the best one → 반복 → final result 
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/5a4a1317-3223-48f0-8f3c-3a00f969ed0a/image.png)
+    
+
+[4+Prompt+Generator.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/601e1130-d5fd-4991-a7c8-2f1d3fd8d1cf/4PromptGenerator.pdf)
+
+[3+Prompt+Engineering+Framework.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/170c36b0-23d6-4a03-8c40-5b58aa103804/3PromptEngineeringFramework.pdf)
+
+### 32. The Combination of Prompting Concepts ( #role 부여 → structured prompt → example 부여 → 약간의 magic word ) ( #⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐ 이렇게 기본적으로 물어보는게 굉장히 중요 )
+
+[4+Prompt+Generator.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/601e1130-d5fd-4991-a7c8-2f1d3fd8d1cf/4PromptGenerator.pdf)
+
+[3+Prompt+Engineering+Framework.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/170c36b0-23d6-4a03-8c40-5b58aa103804/3PromptEngineeringFramework.pdf)
+
+- combine 에서 가장 중요한 건, 의미론적 연관성
+
+- 예시 1
+    - 트레이너 이름을 부여 → 의미론적 연관성! 을 부여 ㄴㄴ
+- 예시 2 ( ⭐⭐⭐⭐⭐⭐)
+    - role 부여
+    - structured prompt
+    - example 을 부여
+    - 약간의 magic word
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/afad1638-2556-40ff-be64-8759557f888f/image.png)
+
+### **33. Creating Your Own Assistants in HuggingChat ( #⭐⭐⭐⭐⭐⭐ 특정 url 을 부여할 수 있음 )**
+
+https://huggingface.co/chat/assistants
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/8af1e8e8-0498-4c9d-bb0f-74076ab91daf/image.png)
+
+(아래에 보면, 설정값이 있음) 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/54eeddf4-6d72-4987-a262-d1f5a1f4c299/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/1dc38f2b-33c1-4e0f-8793-7421840b17e3/image.png)
+
+(https://huggingface.co/chat/settings/assistants/new) 여기 임 ⭐⭐⭐⭐⭐ 
+
+(셋팅항목에서 Link 를 제공할 수 있음 → 그러면, github 을 연결할 수 있음) 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/bb15bf24-cc96-45da-b18f-1be44d61c45c/image.png)
+
+---
+
+### 34. grok ( #⭐⭐⭐⭐⭐ 라마3 를 사용해도, 출력되는 결과물이 진짜 빠름 # 빠른다는게 장점 # 대신 open source 의 퀄리티를 믿을 수 있는가의 문제 #open source 를 쓴다면 grok)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/9f7ae776-3318-4af5-a728-2293178607da/image.png)
+
+### 35. 요약
+
+- 오픈 소스를 쓴다면 grok 이 빠름 . 허깅chat 도 있음
+
+- 프롬프트
+    - 시스템 프롬프트
+    - 일반 프롬프트
+        - 프롬프트 엔지니어링
+            - 의미론적 연관성 ⭐⭐⭐
+
+- 더 나은 결과물을 얻으려면 ⭐⭐⭐⭐⭐
+    - assistant 설정
+    - 시스템 프롬프트
+    - 일반 프롬프트를 결합
+
+### 36. What Will Be Covered in This Section?
+
+- RAG 어플리케이션 만들 때 필요한 요소
+    - fucntion calling
+    - vector databases
+    - embedding models
+    
+- make a server with LM Studio
+- connect these two pieces
+- Ohama
+
+- 이 수업이 지나면 RAG agent 가 생김
+    - api 활용한 외부 검색
+    - privacy 보호 데이터
+
+### 37. What is Function Calling in LLMs ( # LLM 은 하나의 operating system 으로써 기능 → so, 특정 task 를 잘 수행하지 못 할 경우, `사진 찍기` , `그림 그리기` 처럼, 이미 잘 만들어진 function 을 호출해서 수행하게 함. 그러면, LLM 은 ‘A 상황에서 → B 함수를 호출’ 하게 하는 역할만 함 ( #즉, LLM 은 `operating sysmtem` 이고. `specific task` 는 function 으로 call 한다. ⭐⭐⭐)
+
+- LLM 은 `operating system` ⭐⭐⭐⭐⭐
+- LLM 은 `specific task` 를 잘 수행하지는 못 함.
+    - ex) 계산, 사진 찍기 등
+    - LLM 은 이 특정 TASK 를 ‘호출’ 하는 역할을 함 ⭐⭐⭐
+    - ex) diffusion model 에 그림 그리는 요청을 하고, 답변을 받음
+
+(파일 시스템에서 읽어들일 수도 있음) 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/1ed68828-6929-4d57-b17f-5b67b1c3b1fa/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/1f60703d-1790-4438-82a8-7888fbae9f3a/image.png)
+
+function call 을 사용해서 계산하게 되는 경우 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/dffeda92-5e97-4ffd-91e9-b478ff34185c/image.png)
+
+### 38. Vector Databases, Embedding Models & Retrieval-Augmented Generation (RAG) ( 1) `파일` 이 들어옴 2) 파일은 `임베딩` 을 거침 3) 그 결과 `token` 이 만들어짐 4) 토큰은 `cluster` 형태로 vectorDB 에 어장이 됨 5) 사용자가 `LLM` 에게 질문을 함 6) LLM 은 vectorDB 에 있다면, 정확히 해당 클러스터에서 답을 가져옴 7) 만약, vector DB 에 없다면, 그렇지 않음 8) 이 과정은 클럽에서 아빠 혹은 엄마가 자식을 찾는 것 처럼 자연스럽게 이루어짐
+
+- LLM 에 지식을 추가하는 법
+    - context learning
+        - 프롬프트 엔지니어링으로
+    - direcct technology
+    - etc
+        - fine tunning
+
+- vector database, embedding 에 대한 이해
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/71a5120a-0051-4d0c-bbb3-312d1586ccb2/image.png)
+    
+
+- context window 에 너무 많은 token 이 있으면 LLM 은 이해하지 못 함
+    - 이걸 해결하는게 direct technology
+
+```bash
+file 을 올림
+file 이 vector database 에 저장됨 
+embedding model 는 파일을 vector 로 만듦 
+vector 로 변환된 것에 대해 우리는 search query 를 할 수 있음. 
+```
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/80dfc218-4990-4d82-9adc-805037d0924d/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/74dd6a61-9f1d-4201-b57d-251069db5d6c/image.png)
+
+( 출처 : https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/) 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/02974e51-6670-433d-a2ac-ee599733d66d/image.png)
+
+```bash
+[1-저장하는 관점]
+vector DB 에 저장 하려면, embedding model 을 사용해야 함
+
+[2-유저가 사용하는 관점]
+user 가 query 를 날림 
+embedding model 로 들어감 
+embedding model 을 거쳐서 vector db 로 갈 수 있음. 
+vector db 에서 해당되는 데이터를 갖고 옴? 
+LLM 은 VectorDB 에서 데이터를 찾아옴
+```
+
+- (CF. 임베딩 = `자연어` 를 `벡터` 로 변환 한 결과 혹은 과정)
+    - 데이터를 `끼워넣으면` → 기계가 이해할 수 있는 벡터로 변환
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/6ea8dd44-2917-40ac-aef8-d135b2fa337f/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/df1903f8-34a5-422f-bc1b-a3e422642387/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/58525786-c983-4047-9f26-8b4a599e0435/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/3493e140-eaad-43a2-a335-ec38bc6a1225/image.png)
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/8884e16b-fc16-4a4d-9818-5e80b87c55fd/image.png)
+
+### 1차 설명
+
+pdf 가 들어옴 (csv 등의 파일)
+
+pdf 는 `임베딩` 을 거쳐서 → `벡터` 로 저장이 됨 (`token` 을 만듦) 
+
+벡터 DB 는 `cluster` 로 구성됨 
+
+0.2 ~ 0.4 사이의 값이 저장되는 cluster
+
+1 ~ 2 사이의 값이 저장되는 cluster 가 존재함
+
+동일 cluster 에는 `비슷한 부류`들 이 들어감 ex) 과일, 동물 등등 (⭐⭐⭐ 이게 중요) 
+
+벡터 DB 에서는 어떻게 이렇게 작동하는가? 
+
+파티에서 1) 댄스 플로어 2) 맥주 BAR 3) NERDS 그룹이 모여있는 곳이 있음 
+
+`걸` 들은 `댄스플로어` 에 있음 
+
+그러니, 벡터 DB 에서 , 걸들을 그곳에서 찾는다. 
+
+사용자가 `QUERY 를 요청`하면, `LLM` 은 해당 쿼리를 `어디에서 찾아야 하는지 정확히` 안다. ex) 아빠가 딸을 댄스플로어에서 찾는 것 처럼 
+
+### 2차 설명
+
+`파일` 이 들어옴 
+
+파일은 `임베딩` 을 거치고 → `token` 이 만들어짐
+
+`token` 은 vectorDB 에 `클러스터` 형태로 저장됨
+
+LLM 에게 질문을 하면
+
+만약 필요하다면(vector DB 에 있다면, function call 을 한다.) → `LLM` 은 `function calling` 을 통해 vectorDB 안에, 정확히 어디를 검색하면, 알 수 있는지를 알고 있음. 마치 클럽에서 딸을 찾는 아빠 처럼.  (#⭐ 이 검색의 주체가 LLM 이라는 것 #이때, `specific task` 이므로, `function-calling` 이 사용된다는 것. ) (# 이게 function calling with direct technology) 
+
+vector DB 에 저장되어 있지 않다면, function call 을 하지 않는다. ( #⭐⭐⭐⭐⭐) 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/ec572c02-eb31-4f8c-8e77-78ea2466e1e1/image.png)
+
+---
+
+LM 스튜디오로 서버를 만드는구나 
+
+그리고 이걸 anything LLM 에 연결해주는 구나 
+
+RAG 파이프라인 
+
+악, GITHUB repository 를 연결 할 수 있구나 
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/783cc112-0b05-4cf4-9046-34aeb2d15b4a/image.png)
+
+
+---
+
+# 내가 해야 하는 것
+
+- 쓰고 싶은 코드, 쓰고 싶은 글이 있음. 이걸 학습 시키는 것
+    - ex) 마케팅 카피를 쓰는 prompt 를 판매 한다.
+    - 사이트 분석을 한다.
+    - 회원의 행동 유형을 분석한다.
+    - 더 고도화된 prompt 를 만든다.
+- 이 학습된 걸 기반으로 output 을 내뱉게 하는 것
+
+- 코드를 내뱉게 하는 것
+    - https://learnprompting.org/courses/boost-your-day-to-day-efficiency-with-generative-ai
+    - 혹은 LLMs? RAG?
+        - 이거 관련된 udemy?
+        - anything LLM 키워드로?
