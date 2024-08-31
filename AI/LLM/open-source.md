@@ -18,7 +18,7 @@ agent 를 만들 수 있음.
 
 ### 4. Explanation of the Links
 
-[Untitled Database](https://www.notion.so/ffc24cae475842c39354f7290287b407?pvs=21)
+[Untitled Database](https://www.notion.so/58af73ef41ab4307841d9a0cfc395e6c?pvs=21)
 
 [Links.pdf](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/766c8137-b22c-4484-92e3-5ee329fd26e6/Links.pdf)
 
@@ -784,7 +784,7 @@ length should be (500 words), and the text should be well-structured.
 - 역할 부여 한다는 건?
     - `핵심 키워드` 를 제시하는 것
     - 여기에서는 `셰익스피어`, `writer`, `poem`
-    - 이게 중요한 이유는 의미론적 연관성(`symantic association`) 때문 ([https://www.notion.so/Open-source-LLMs-Uncensored-secure-AI-locally-with-RAG-98bddf23fc26496f9dc6a8b36dde15af?pvs=4#d3df4ef8bcf040e6988d0424dfebaf99](https://www.notion.so/Open-source-LLMs-Uncensored-secure-AI-locally-with-RAG-98bddf23fc26496f9dc6a8b36dde15af?pvs=21)) 여기 필기 참고
+    - 이게 중요한 이유는 의미론적 연관성(`symantic association`) 때문 ([https://www.notion.so/Open-source-LLMs-Uncensored-secure-AI-locally-with-RAG-98bddf23fc26496f9dc6a8b36dde15af?pvs=4#d3df4ef8bcf040e6988d0424dfebaf99](https://www.notion.so/Open-source-LLMs-Uncensored-secure-AI-locally-with-RAG-5299a6ebed05411abf5d20c948e37655?pvs=21)) 여기 필기 참고
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/a9506ef3-d415-4f43-b2c5-1b119e030a02/image.png)
 
@@ -1140,6 +1140,60 @@ vector DB 에 저장되어 있지 않다면, function call 을 하지 않는다.
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/ec572c02-eb31-4f8c-8e77-78ea2466e1e1/image.png)
 
+### 39. Installing Anything LLM and Setting Up a Local Server for a RAG Pipeline
+
+![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/9adc7f23-b62d-4d0d-83f2-56d07c2b2234/image.png)
+
+- 깃헙
+
+https://github.com/Mintplex-Labs/anything-llm
+
+- 다운로드
+
+[Download AnythingLLM for Desktop](https://anythingllm.com/download)
+
+- 선택
+    - LM Studio @anything LLM
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/4e4d496e-0ae4-4ccf-be81-99d242f30c68/image.png)
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/7f2a1777-59f7-452b-b05e-0b1a5f162ea3/image.png)
+    
+    - 내가 원하는 모델 고르기 @LM Studio
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/0a4b6619-80c8-43a9-a38b-c79be09ade0b/image.png)
+    
+    - 요소들 확인하고 `start server`
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/2c8c1f4e-dd93-47b2-8620-1857d2d6d21b/image.png)
+    
+    - 값 복사하고, 넘기기 → `LMStudio URL` 항목에 넣기
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/ca155b78-9e15-4c1c-9353-99ac11469ed4/image.png)
+    
+    ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/618a7c81-523e-4e24-833c-409e5b37faa9/image.png)
+    
+    ![강의 버전 ](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/049e19fb-3767-4aec-b1c4-9dae154a18f3/image.png)
+    
+    강의 버전 
+    
+    ![현재 Anything LLM 에는 위에 처럼 되어 있지 않고, 이렇게 설정값으로 되어 있음.
+    여기에서 BaseURL 을 설정할 수 있음. ](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/3becc14a-36e7-4db0-92f1-e210132bcbdb/image.png)
+    
+    현재 Anything LLM 에는 위에 처럼 되어 있지 않고, 이렇게 설정값으로 되어 있음.
+    여기에서 BaseURL 을 설정할 수 있음. 
+    
+     
+    
+    ![이건 영상에서는 이렇게 했는데, 
+    나는 어떻게 했는지 모르겠음. 
+    우선, 그냥 했던 것 같음](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/75884c27-708a-41a5-acea-682355e41b8c/image.png)
+    
+    이건 영상에서는 이렇게 했는데, 
+    나는 어떻게 했는지 모르겠음. 
+    우선, 그냥 했던 것 같음
+    
+
 ---
 
 LM 스튜디오로 서버를 만드는구나 
@@ -1151,7 +1205,6 @@ RAG 파이프라인
 악, GITHUB repository 를 연결 할 수 있구나 
 
 ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/0cae17fc-ff5c-424e-96d6-f2bfc4d7beb4/783cc112-0b05-4cf4-9046-34aeb2d15b4a/image.png)
-
 
 ---
 
