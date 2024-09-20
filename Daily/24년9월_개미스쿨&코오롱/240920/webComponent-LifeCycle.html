@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- [출처] 
+        - 웹 컴포넌트 사용 예시 : https://yozm.wishket.com/magazine/detail/2217/ 
+    -->
+
+    <!-- [웹 컴포넌트 이름 정하기]
+        - 웹 컴포넌트 이름은 반드시 하이픈(-)을 포함해야 한다. 그래야, 'customElements.define' 로 등록할 때, standard HTML 태그와 구분할 수 있음.
+        
+        - data-value="Initial Value" 이게 들어간 이유는❓ 
+        - 이 생명주기를 언제 사용하지❓
+    -->
+    <my-web-component data-value="✅초기값" >
+        <span>✅This is slotted content</span>
+    </my-web-component>
+
+
+    <div>adoptedCallback 테스트</div>
+    <iframe id="myIframe" style="width: 100%; height: 200px;"></iframe>
+    <button id="moveButton">Move Component to Iframe</button>
+    
+    <br><br>
+
+    <div>attributeChangedCallback 테스트</div>
+    <button id="changeValueButton">Change Attribute</button>
+    <div> 값 변화 테스트 : <span id="changedValue"> " "</span> </div>
+
+</body>
+
+<script>
+
+    // HTMLElement 클래스를 확장하여 웹 컴포넌트 기능을 정의
+    class MyWebComponent extends HTMLElement {
+        constructor() {
+            super();  // 이 부분에서, JS 지식이 부족함
+            this.attachShadow({mode: 'open'});  // 해당 클래스 생성자 안에서, attachShadow() API 를 호출 하면 -> 해당 커스텀 컴포넌트는 'Shadow DOM' 이 된다.
+                /* '캡슐화' 의 장점 
+                    - 내부에서 선언한 style 이 '격리' 된다. 
+                */
+
+            // template 생성
+            const template = document.createElement('template');
+            template.innerHTML = `
+                <style>
+                    p {
+                        color : blue;
+                        font-size: 20px;
+                    }
+                    slot::slotted(span) {
+                        font-weight: bold;
+                    }
+                    button {
+                        margin-top: 10px;
+                        padding: 5px 10px;
+                    }
+                }
+                </style>
+                
+                <p> Hello from My Web Component! 
+                    
+                    <!-- 
+                        - ✅ <my-web-component> 태그 안에 넣은 내용에 <slot></slot> 으로 들어간다. 
+                        - 그런데, 어떻게, 갑자기, slot 으로 들어가는거야? 
+                            - 이게 들어올 수 있는 이유는, customElements.define('my-web-component', MyWebComponent) 이렇게 연결해줬기 때문. 
+                                이때, 'my-web-component' 는 <my-web-component> 태그를 의미함. 
+                    -->
+                    <slot></slot> 
+                </p>
+                <button>Click me</button>
+                
+            `;
+            
+            // template 을 shadow DOM 에 추가 | 이걸 해야, template 가 실제 DOM 에 추가 된다. 
+            this.shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+
+
+        /* '웹 컴포넌트' 가 DOM 에 추가될 때 실행되는 콜백 함수
+            - 여기에서 '웹 컴포넌트' 는, <my-web-component> 태그를 의미한다.
+            - connectedCallback 은, <my-web-component> 태그가, REAL-DOM 에 추가되었을 때, 실행    
+        
+            - 그러면, 실행순서는 이렇게 되는 건가. 
+                1) 브라우저가 <my-web-component> 태그를 만난다. 
+                2) 브라우저는 '아, 이건 customElements.define 에 의해 등록된거니까, 같이 Mapping 되어 있는 클래스를 실행시키면 돼' 라고 생각한다.
+                3) 그러면, MyWebComponent 클래스가 실행되고, ShadowDOM 이 생성된다. 
+                4) ShadowDOM 은 '특정 과정' 을 거쳐서 RealDOM 에 붙는다. 
+                5) 그러면, connectedCallback() 이게 실행된다. 
+        */
+        connectedCallback() {
+            // Perform initialization tasks here, like fetching data or adding event listeners
+            
+            // 이 순간, 이미 화면은 보이고 있다. 왜냐면, REAL-DOM 에 추가 되었기 때문에! 
+            console.log('MyWebComponent added to the REAL-DOM');
+            
+
+            /* [예시]
+            - 사용자 행동이 없어도, '웹 컴포넌트' 가 DOM 에 추가됨을 인지하면 -> 알아서 색깔이 변경된다.
+            */
+            const button = this.shadowRoot.querySelector('button');
+            button.style.backgroundColor = 'lightgreen';
+            
+            
+            /* [예시]
+                - connectedCallback 함수 자체는 한번 호출되고 종료됨
+                - 그런데, 왜, 클릭 이벤트에 바인딩 된 함수는 계속 실행되는 거지? -> 응 맞아. 
+                - 그럼, 이게 왜 계속 실행될 수 있는거야? 
+                    -> 'registered in the browser’s event system.' 되었기 때문에. 
+                - registered in the browser’s event system. 이게 무슨 의미인데? 
+                    - browser remembers which element (e.g., your button) should respond to which event (e.g., the "click" event).
+                    - browser 는 이것을 browser 의 memory 에 저장해둔다.
+            */
+            button.addEventListener('click', () => {
+                console.log('Button clicked!');
+                alert('Button was clicked inside the web component!');
+            });
+        }
+
+        // Real-Dom 에서 제거된다는 말은 '화면에서 사라져서 안 보인다.' 라는 의미
+        disconnectedCallback() {
+            // Optional: Cleanup when the component is removed from the DOM
+            console.log('MyWebComponent removed from the REAL-DOM');
+            // Optionally, you could clean up event listeners here
+        }
+
+        // Called when the custom element(<my-web-component>) is moved to a new document
+        adoptedCallback() {
+            console.log('MyWebComponent moved to a new document(이번의 경우에는 iframe 으로 이동함)');
+        }
+
+
+        // specify which attributes to observe
+            static get observedAttributes() {
+            return ['data-value']  // 'data-value' attribute 가 변화하는 것을 지켜보겠다.
+        }
+
+        // 'data-value' attribute 가 변할 때 실행되는 콜백 함수 
+        // (전제는 observedAttributes 에서 'data-value' 대상의 변화를 지켜보겠다고 설정해둠)
+        attributeChangedCallback(name, oldValue, newValue) {
+            console.log(`${name} changed from ${oldValue} to ${newValue}`);
+        }
+    }
+
+
+    /* [예시-2] adoptedCallback 
+        - custom element(<my-web-component>) 가 다른 document 로 이동할 때 실행되는 콜백 함수
+        - '이동' 에는 'iframe' 에 따른 이동, '다른 브라우저 창 또는 탭' 간 이동 등
+    */
+    document.getElementById('moveButton').addEventListener('click', () => {
+        const iframe = document.getElementById('myIframe').contentDocument;
+        const myWebComponent = document.querySelector('my-web-component');
+        iframe.body.appendChild(myWebComponent)         // 이게 실행되면, myWebComponent 이 iframe 으로 이동하고 -> 그로 인해 adoptedCallback() 이 실행된다.
+    });
+
+
+    // 웹 컴포넌트를 등록 
+    customElements.define('my-web-component', MyWebComponent);
+        /* [해석] 
+            - customElements 은 웹 표준 API 임 
+            - 'my-web-component' 라는 이름의 웹 컴포넌트를, -> 그 다음? 
+
+            [첫번째 인자 : name]
+            - '하이픈' 을 포함 -> standardHTML 이 아니고, custom element 라고 알려주는 기능을 함. 
+
+            [두 번째 인자: constructor]
+            - 브라우저가, 'my-web-component' 라는 이름의 태그를 만나면, MyWebComponent 클래스를 생성하라고 알려준다. 
+            
+            [브라우저가 MyWebComponent 클래스를 생성하면] (브라우저 입장에서 본다면)
+                1) constructor() 함수가 실행된다.
+                2) shadow DOM 이 생성된다. (this.attachShadow({mode: 'open'}); 의 역할)
+                3) template 이 생성되고 -> innerHTML 이 붙는다. 
+                    3-1) 이때, <slot> 으로, (아마도 주입받은) my-web-component 태그가 들어간다. 
+                4) shadow DOM 에 template 이 붙는다. (this.shadowRoot.appendChild(template 이거에 의해) 
+                5) 그러면, 실제 DOM 에 template 이 붙어서 보이게 된다? 
+
+            [Visualization]
+                1) 브라우저가 <my-web-component> 태그를 만나면,
+                2) 브라우저는 web api 를 통해, 'customElements.define' 를 사용해서, 'my-web-component' 가 'MyWebComponent' 와 Mapping 되어있다는 것, 을 알게 된다. 
+                3) 브라우저는 'MyWebComponent' 클래스를 실행시켜서 인스턴스를 만든다.
+                4) 인스턴스를 만들면 결국, ( 1) template 엘리먼트가 있고 2)slot 까지 붙은 )shadowDOM 이 생성된다.
+        */
+
+
+    document.getElementById('changeValueButton').addEventListener('click', () => {
+        const component = document.querySelector('my-web-component');
+
+        const newValue = prompt('Enter a new value');  // 외부에서 값을 입력받음 
+
+        console.log("attributeChangedCallback 실행전")
+        debugger
+        component.setAttribute('data-value', newValue) // 이 순간, observedAttributes 여기에 설정된 data-value 의 값이 변함 -> attributeChangedCallback 함수 실행됨
+        console.log("data-value에 바인딩된 값이 바뀌었으므로 -> attributeChangedCallback 실행됨")
+        debugger
+
+        const changedValue = document.getElementById('changedValue');
+        changedValue.textContent = `${newValue}`; // 바뀐걸 화면에 보여줌 | 이미 로직은 바뀜
+
+    });
+
+
+
+
+</script>
+
+
+</html>
