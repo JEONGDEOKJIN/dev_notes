@@ -24,7 +24,7 @@
     # feature/review 를 develop 에 merge 하고, feature/review 제거 
 	    6.	git flow feature finish review
       7. 분명히, merge 충돌이 남! 이걸 해결! -> 그러면 완전히 merge 됨
-        # 음. 이러고 나면, 근데, review 가 사라지지 않네? ❓❓❓❓❓❓❓❓ 왜지?
+      8. 음. 이러고 나면, 근데, review 가 사라지지 않네? ❓❓❓❓❓❓❓❓ 왜지?
 ```
 
 
