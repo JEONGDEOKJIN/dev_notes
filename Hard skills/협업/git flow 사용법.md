@@ -4,17 +4,19 @@
 ```bash
 # [오전] 프로젝트 시작할 때 
     # develop 브랜치 가서 최신화 하기
-        1. git checkout develop
-        2. git pull origin develop
+        1. git checkout develop-1
+        2. git pull origin develop-1
     # 최신화된 develop 기준으로 feature 브랜치 만들기
         3. git flow feature start <feature-name>
-	
+        3-1. git push 해서, 브랜치를 원격에 푸쉬 (게시버튼)
+
 # [마감] 하루 중 꼭 충돌 잘 해결하고 머지 하기 
     # feature/review 에 커밋 -> push
         4.	코드 수정 및 git add . → git commit -m "커밋 메시지" -> push 
           $ git add .
           $ git commit -m "style: 상품 후기 등록 모달"
-          $ git push origin feature/review
+          $ git push 
+            # 근데 git push 랑 git push origin develop-1 이랑 뭐가 다르지?
 
 	# develop 브랜치로 이동해서 최신화
         5.	git pull origin develop (Optional)
@@ -25,7 +27,14 @@
 	    6.	git flow feature finish review
       7. 분명히, merge 충돌이 남! 이걸 해결! -> 그러면 완전히 merge 됨
       8. 음. 이러고 나면, 근데, review 가 사라지지 않네? ❓❓❓❓❓❓❓❓ 왜지?
+
+    # push 까지 해야 올라감 
+    git push
+
 ```
+## [자료 모음]
+
+- 기존에 게임배틀 프로젝트에서 노션에 정리한 것 : https://www.notion.so/git-process-a58a2c65af2a47ffbabf19268cd29823?pvs=4
 
 
 ## [최신화] git flow 에서 develop 코드 최신화 하고 작업하기 
@@ -139,7 +148,7 @@ git push origin develop-1
 <br />
 
 
-## 가장 최신화된 git-flow 버전으로 할 때, feature/review 가 안 사라지는데? 
+## [이슈] 가장 최신화된 git-flow 버전으로 할 때, feature/review 가 안 사라지는데? 
 
 - 여전히 feature/review 가 있네
 ![Image](https://i.imgur.com/RYZ1Pb5.png)
@@ -171,4 +180,43 @@ git push origin develop-1
         # 음. 이러고 나면, 근데, review 가 사라지지 않네? ❓❓❓❓❓❓❓❓ 왜지?
 ```
 
+<br />
+
+
+## [로그] 240926에 작업한 git flow 과정 기록 ( #로컬에 브랜치가 남는 오류 해결 )
+
+1. `feature/deliveryAddress` 브랜치 생성
+
+```bash
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (feature/review_1)
+$ git switch develop-1
+Switched to branch 'develop-1'
+Your branch is up to date with 'origin/develop-1'.
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (develop-1)
+$ git pull origin develop-1
+From https://skins.shopby.co.kr/team-3661/wstore
+ * branch            develop-1  -> FETCH_HEAD
+Already up to date.
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (develop-1)
+$ git flow feature start deliveryAddress
+Switched to a new branch 'feature/deliveryAddress'
+
+Summary of actions:
+- A new branch 'feature/deliveryAddress' was created, based on 'develop-1'
+- You are now on branch 'feature/deliveryAddress'
+
+Now, start committing on your feature. When done, use:
+
+     git flow feature finish deliveryAddress
+
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (feature/deliveryAddress)
+$
+```
+
+[1-1] 문제는, 현재, 원격 브랜치는 아직 생성이 안 되어 있다는 거
+
+![Image](https://i.imgur.com/SYas1mN.png)
 
