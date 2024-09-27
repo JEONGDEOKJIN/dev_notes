@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- [출처] 
+        - 웹 컴포넌트 사용 예시 : https://yozm.wishket.com/magazine/detail/2217/ 
+    -->
+
+    <!-- [웹 컴포넌트 이름 정하기]
+        - 웹 컴포넌트 이름은 반드시 하이픈(-)을 포함해야 한다. 그래야, 'customElements.define' 로 등록할 때, standard HTML 태그와 구분할 수 있음.
+    -->
+    <my-web-component>
+        <span>✅This is slotted content</span>
+    </my-web-component>
+
+</body>
+
+<script>
+
+    // HTMLElement 클래스를 확장하여 웹 컴포넌트 기능을 정의
+    class MyWebComponent extends HTMLElement {
+        constructor() {
+            super();  // 이 부분에서, JS 지식이 부족함
+            this.attachShadow({mode: 'open'});  // 해당 클래스 생성자 안에서, attachShadow() API 를 호출 하면 -> 해당 커스텀 컴포넌트는 'Shadow DOM' 이 된다.
+                /* '캡슐화' 의 장점 
+                    - 내부에서 선언한 style 이 '격리' 된다. 
+                */
+
+            // template 생성
+            const template = document.createElement('template');
+            template.innerHTML = `
+                <style>
+                    p {
+                        color : blue;
+                        font-size: 20px;
+                    }
+                    slot::slotted(span) {
+                        font-weight: bold;
+                    }
+                }
+                </style>
+                
+                <p> Hello from My Web Component! 
+                    
+                    <!-- 
+                        - ✅ <my-web-component> 태그 안에 넣은 내용에 <slot></slot> 으로 들어간다. 
+                        - 그런데, 어떻게, 갑자기, slot 으로 들어가는거야? 
+                            - 이게 들어올 수 있는 이유는, customElements.define('my-web-component', MyWebComponent) 이렇게 연결해줬기 때문. 
+                                이때, 'my-web-component' 는 <my-web-component> 태그를 의미함. 
+                    -->
+                    <slot></slot> 
+                </p>
+                
+            `;
+            
+            // template 을 shadow DOM 에 추가 | 이걸 해야, template 가 실제 DOM 에 추가 된다. 
+            this.shadowRoot.appendChild(template.content.cloneNode(true));
+        }
+    }
+
+    // 웹 컴포넌트를 등록 
+    customElements.define('my-web-component', MyWebComponent)
+        /* [해석] 
+            - customElements 은 웹 표준 API 임 
+            - 'my-web-component' 라는 이름의 웹 컴포넌트를, -> 그 다음? 
+
+            [첫번째 인자 : name]
+            - '하이픈' 을 포함 -> standardHTML 이 아니고, custom element 라고 알려주는 기능을 함. 
+
+            [두 번째 인자: constructor]
+            - 브라우저가, 'my-web-component' 라는 이름의 태그를 만나면, MyWebComponent 클래스를 생성하라고 알려준다. 
+            
+            [브라우저가 MyWebComponent 클래스를 생성하면] (브라우저 입장에서 본다면)
+                1) constructor() 함수가 실행된다.
+                2) shadow DOM 이 생성된다. (this.attachShadow({mode: 'open'}); 의 역할)
+                3) template 이 생성되고 -> innerHTML 이 붙는다. 
+                    3-1) 이때, <slot> 으로, (아마도 주입받은) my-web-component 태그가 들어간다. 
+                4) shadow DOM 에 template 이 붙는다. (this.shadowRoot.appendChild(template 이거에 의해) 
+                5) 그러면, 실제 DOM 에 template 이 붙어서 보이게 된다? 
+
+            [Visualization]
+                1) 브라우저가 <my-web-component> 태그를 만나면,
+                2) 브라우저는 web api 를 통해, 'customElements.define' 를 사용해서, 'my-web-component' 가 'MyWebComponent' 와 Mapping 되어있다는 것, 을 알게 된다. 
+                3) 브라우저는 'MyWebComponent' 클래스를 실행시켜서 인스턴스를 만든다.
+                4) 인스턴스를 만들면 결국, ( 1) template 엘리먼트가 있고 2)slot 까지 붙은 )shadowDOM 이 생성된다.
+        */
+
+
+
+</script>
+
+
+</html>
