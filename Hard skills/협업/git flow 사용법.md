@@ -9,6 +9,7 @@
     # 최신화된 develop 기준으로 feature 브랜치 만들기
         3. git flow feature start <feature-name>
         3-1. git push 해서, 브랜치를 원격에 푸쉬 (게시버튼)
+          # 이걸 하면, 당연히, 원격 브랜치가 생김! 
 
 # [마감] 하루 중 꼭 충돌 잘 해결하고 머지 하기 
     # feature/review 에 커밋 -> push
@@ -19,19 +20,29 @@
             # 근데 git push 랑 git push origin develop-1 이랑 뭐가 다르지?
 
 	# develop 브랜치로 이동해서 최신화
-        5.	git pull origin develop (Optional)
+        5.	git pull origin develop-1
     
     # ? 여기에서 develop-1 에 있어야 하나? 아니면, feature/review 브랜치에 있어야 하나? -> feature/review 브랜치로 이동
 
     # feature/review 를 develop 에 merge 하고, feature/review 제거 
-	    6.	git flow feature finish review
-      7. 분명히, merge 충돌이 남! 이걸 해결! -> 그러면 완전히 merge 됨
-      8. 음. 이러고 나면, 근데, review 가 사라지지 않네? ❓❓❓❓❓❓❓❓ 왜지?
+	    6. git flow feature finish review 
+      7. git flow 에 따른 충돌 해결 
+        # 이때, vim 편집기가 동작하면서 commit 메시지를 쓰라고 함
+        # git flow 자체가 1) merge 하고 2) 로컬 브랜치를 제거 하는 것 
+          # 그러면, esc -> :wq! 를 입력하면 됨. 
+        # git flow 는 1) merge 2) 브랜치 정리의 역할 까지만 하고, push 는 별도로 해줘야 함
 
     # push 까지 해야 올라감 
-    git push
+      8. git push
+      # [push 를 하지 않았을 경우 발생하는 현상] 
+        # '음. 이러고 나면, 근데, feature 브랜치인 review 가 사라지지 않는다.' 라는 문제 
+        # develop-1 브랜치에, 업로드한 코드가 반영되지 않는다는 문제
 
+# [참고]
+  # [로그] 이렇게 하니까 깔끔하게 진행됨  (# `241002-코오롱` ) 에서 제대로 git-flow 를 사용해서, 의도된 대로 진행
 ```
+
+
 ## [자료 모음]
 
 - 기존에 게임배틀 프로젝트에서 노션에 정리한 것 : https://www.notion.so/git-process-a58a2c65af2a47ffbabf19268cd29823?pvs=4
@@ -220,3 +231,32 @@ $
 
 ![Image](https://i.imgur.com/SYas1mN.png)
 
+
+
+## [로그] 이렇게 하니까 깔끔하게 진행됨  (# `241002-코오롱` )
+
+```bash
+# feature/delivery 브랜치에서 
+    # feature/review 에 커밋 -> push
+        4.	코드 수정 및 git add . → git commit -m "커밋 메시지" -> push 
+          $ git add .
+          $ git commit -m "style: 상품 후기 등록 모달"
+          $ git push 
+            # 근데 git push 랑 git push origin develop-1 이랑 뭐가 다르지?
+
+# develop-1 브랜치로 이동한 뒤 
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (feature/delivery)
+$ git switch develop-1
+Switched to branch 'develop-1'
+Your branch is up to date with 'origin/develop-1'.
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (develop-1)
+Merge branch 'feature/delivery' into develop-1
+$ git pull origin develop-1
+From https://skins.shopby.co.kr/team-3661/wstore
+ * branch            develop-1  -> FETCH_HEAD
+Already up to date.
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (develop-1)
+$ git flow feature finish delivery
+```
