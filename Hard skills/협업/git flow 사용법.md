@@ -23,7 +23,7 @@
         5.	git pull origin develop-1
           5.1 '원격에서의 최신 코드' 가 '내 develop-1' 으로 실제로 들어왔는지 확인 
     
-  # feature 브랜치로 이동 (#⭐⭐⭐)
+  # feature 브랜치로 이동 (#⭐⭐⭐⭐⭐)
 	    6. git flow feature finish review     # feature/review 를 develop 에 merge 하고, feature/review 제거 
       7. git flow 에 따른 충돌 해결 
         # 이때, vim 편집기가 동작하면서 commit 메시지를 쓰라고 함
@@ -32,8 +32,9 @@
         # git flow 는 1) merge 2) 브랜치 정리의 역할 까지만 하고, push 는 별도로 해줘야 함
 
     # push 까지 해야 올라감 
-      8. 원격에서 가장 최근에 반영되어야 하는게, 잘 병합 되었는지 필수 확인 (#⭐⭐⭐)
+      8. 원격에서 가장 최근에 반영되어야 하는게, 잘 병합 되었는지 필수 확인 (#⭐⭐⭐⭐⭐)
       9. git push
+      10. jenkins 잘 통과 하는지 확인
       # [push 를 하지 않았을 경우 발햣 생하는 현상] 
         # '음. 이러고 나면, 근데, feature 브랜치인 review 가 사라지지 않는다.' 라는 문제 
         # develop-1 브랜치에, 업로드한 코드가 반영되지 않는다는 문제
