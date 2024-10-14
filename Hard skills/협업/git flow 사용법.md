@@ -22,7 +22,7 @@
 	# develop 브랜치로 이동해서 최신화
         5.	git pull origin develop-1
           5.1 '원격에서의 최신 코드' 가 '내 develop-1' 으로 실제로 들어왔는지 확인 
-    
+
   # feature 브랜치로 이동 (#⭐⭐⭐⭐⭐)
 	    6. git flow feature finish review     # feature/review 를 develop 에 merge 하고, feature/review 제거 
       7. git flow 에 따른 충돌 해결 
