@@ -1,5 +1,39 @@
 # git flow
 
+
+## release-1.0.0 브랜치를 기준으로 git flow로 feature 를 파고, merge 하기 (241022) 
+```bash
+# release-1.0.0 최신화 
+	git switch release-1.0.0
+	git pull    # CF. git pull origin release-1.0.0 이것과 동일하게, 현재 브랜치에 있는 것을 가져오는 명령어가 git pull
+
+# 현재 release-1.0.0 기준으로 feature 브랜치 파기
+  현재 release-1.0.0 브랜치에 있는지 확인
+	git flow feature start customerCenter release-1.0.0    # 시작을 release-1.0.0 기준으로 파면, finish 할 때도, 여기를 기준으로 파짐
+
+# 기능 개발 
+	(불라불라)
+	
+# feature 에 커밋하기 
+	git add .
+	git commit -m "commit message"
+	git push origin feature/<feature-name>
+
+# merge 전 최신화 코드 인지 확인하기 
+	git switch release-1.0.0 #release-1.0.0 브랜치로 이동
+	git pull 
+	
+# feature 에 한거를 release-1.0.0 에 merge 하기 
+	feature 브랜치로 이동하기 #⭐⭐⭐
+	git flow feature finish customerCenter  # 합치기 # 이때, start 를 release-1.0.0 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
+	충돌 해결
+	제대로 충돌 해결 되었는지, 원격 release-1.0.0 의 코드와 최종 확인 
+	release-1.0.0 에 push 
+
+```
+
+
+
 ## [요약 @240924]
 ```bash
 # [오전] 프로젝트 시작할 때 
@@ -266,3 +300,45 @@ $ git flow feature finish delivery
 ## 241010 git flow 작업 
 
 ![Image](https://i.imgur.com/eCrzOh6.png)
+
+
+
+## release-1.0.0 기준으로 git flow feature 브랜치 파기 
+
+```bash
+# release-1.0.0 최신화 
+	git switch release-1.0.0
+	git pull    # CF. git pull origin release-1.0.0 이것과 동일하게, 현재 브랜치에 있는 것을 가져오는 명령어가 git pull
+
+# 현재 release-1.0.0 기준으로 feature 브랜치 파기
+	git flow feature start customerCenter release-1.0.0 
+	# 시작을 release-1.0.0 기준으로 파면, finish 할 때도, 여기를 기준으로 파짐
+
+# 기능 개발 
+	(불라불라)
+	
+# feature 에 커밋하기 
+	git add .
+	git commit -m "commit message"
+	git push origin feature/<feature-name>
+
+# merge 전 최신화 코드 인지 확인하기 
+	git switch release-1.0.0 #release-1.0.0 브랜치로 이동
+	git pull 
+	
+# feature 에 한거를 release-1.0.0 에 merge 하기 
+	feature 브랜치로 이동하기 #⭐⭐⭐
+	git flow feature finish customerCenter  # 합치기 # 이때, start 를 release-1.0.0 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
+	충돌 해결
+	제대로 충돌 해결 되었는지, 원격 release-1.0.0 의 코드와 최종 확인 
+	release-1.0.0 에 push 
+	
+```
+
+- git flow 로 프로젝트 파기 / `release-1.0.0 브랜치` 에서 했음
+![Image](https://i.imgur.com/sFDwPZX.png)
+
+
+- git flow finish 로 merge 하기  
+![Image](https://i.imgur.com/lnlayhS.png)
+

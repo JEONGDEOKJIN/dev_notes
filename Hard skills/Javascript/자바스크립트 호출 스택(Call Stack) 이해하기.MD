@@ -14,28 +14,28 @@ v8 엔진, 싱글 스레드, callback queue, non-blocking apps,
 <br />
 
 
-# engine, call stack, 에 대한 overview
-
-```
-
-```
+# runtime, engine, call stack, 에 대한 overview
 
 
-### 호출 스택(call stack) 이라는게 뭐지? 왜 알아야 하지? 
+### runtime, js runtime, 브라우저의 구성 요소 
+
+
+### 엔진, v8 엔진의 구성요소
+
+### web api 와 callback Queue
+
+### 호출 스택(call stack), 동작원리, 비동기 콜백함수의 필요성
+
+[필요성] 
+- 자바스크립트는 싱글 스레드이므로 호출 스택이 1개 임. 
+
+### 비동기 콜백함수, 제어의 역사, 현재 트렌드 
 
 
 
 
-### 자바스크립트에서의 호출 스택(call stack) 은 어떻게 구성되어 있지? 왜 이렇게 되어 있지? 
 
 
-
-- 쉽게 생각하면, 엔진은 아래와 같이 구성되어 있다. (그런 것 같다.)
-```BASH
-엔진의 구성요소 
-    |--- '기억' 하는 부분 
-    |--- '실행' 하는 부분
-```
 
 
 
