@@ -327,7 +327,7 @@ $ git flow feature finish delivery
 	git pull 
 	
 # feature 에 한거를 release-1.0.0 에 merge 하기 
-	feature 브랜치로 이동하기 #⭐⭐⭐
+	git switch feature/category #⭐⭐⭐ feature 브랜치로 이동
 	git flow feature finish customerCenter  # 합치기 # 이때, start 를 release-1.0.0 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
 	충돌 해결
 	제대로 충돌 해결 되었는지, 원격 release-1.0.0 의 코드와 최종 확인 
@@ -342,3 +342,67 @@ $ git flow feature finish delivery
 - git flow finish 로 merge 하기  
 ![Image](https://i.imgur.com/lnlayhS.png)
 
+
+
+
+# git flow init 부터 사용해보기 
+
+### 프로젝트 시작 
+
+```bash
+# git 설치 
+git flow init
+
+# 이렇게 나오면, 'enter' 치면 됨
+Which branch should be used for bringing forth production releases?
+   - develop-1
+   - main
+
+# 여기에서 좀 막혔는데, 개발 서버를 입력하는거 같은데?
+Which branch should be used for integration of the "next release"?
+   - develop-1
+Branch name for "next release" development: [] develop-1
+   # 여기에서, 기준점을 정하는거 같은데, release-1.0.0 인 경우에 이걸로 했음 
+
+
+# 이 부분들은 다 그냥 enter 를 치면 됨
+How to name your supporting branch prefixes?
+Feature branches? [feature/] 
+Bugfix branches? [bugfix/] 
+Release branches? [release/] 
+Hotfix branches? [hotfix/] 
+Support branches? [support/] 
+Version tag prefix? [] 
+Hooks and filters directory? [C:/Users/nextinnovation/Desktop/NextInnonavtion/projects/wstore/.git/hooks] 
+
+
+# feature 브랜치 설정하기 
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (develop-1)
+$ git flow feature start review
+Switched to a new branch 'feature/review'
+
+Summary of actions:
+- A new branch 'feature/review' was created, based on 'develop-1'
+- You are now on branch 'feature/review'
+
+Now, start committing on your feature. When done, use:
+
+     git flow feature finish review
+
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/wstore (feature/review)
+$
+```
+
+![Image](https://i.imgur.com/bkKUskQ.png)
+
+### git flow 활용해서 commit 하기 
+
+- 이거는 성심 주임님이 준 자료 참고 (git-flow 가이드 (1).docx) 
+
+
+
+# 익스텐션
+```bash
+cntrl + w 활용해서 좌우 대칭되어서 생성되게 하기  
+```
