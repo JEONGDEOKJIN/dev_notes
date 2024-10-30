@@ -25,8 +25,8 @@
 	
 # feature 에 한거를 release-1.0.0 에 merge 하기 
 	git switch feature/000 #feature 브랜치로 이동하기 #⭐⭐⭐
-	git flow feature finish customerCenter  # 합치기 # 이때, start 를 release-1.0.0 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
-	충돌 해결
+	git flow feature finish customerCenter release-1.0.0  # 합치기 # 이때, start 를 release-1.0.0 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
+	충돌 해결 
 	제대로 충돌 해결 되었는지, 원격 release-1.0.0 의 코드와 최종 확인 
 	release-1.0.0 에 push 
 
