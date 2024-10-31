@@ -21,7 +21,7 @@
 
 # merge 전 최신화 코드 인지 확인하기 
 	git switch release-1.0.0 #release-1.0.0 브랜치로 이동
-	git pull 
+	git pull # git pull origin release-1.0.0 과 동일. 왜냐면, 현재 release-1.0.0 브랜치에 있기 때문
 	
 # feature 에 한거를 release-1.0.0 에 merge 하기 
 	git switch feature/000 #feature 브랜치로 이동하기 #⭐⭐⭐

@@ -212,3 +212,92 @@ taxiDriver.runTaxi();
 - interface 상속
 
 
+# 개방 폐쇄 원칙에 따른 컴포넌트 설계 
+
+```bash
+- 기능 추가시 본체를 수정하지 말고 '확장' 할 것
+- 리액트 컴포넌트에서 '확장' 방식 중 하나는 children 을 사용
+```
+
+### 
+
+- buton 컴포넌트 
+```ts
+// components/Button.tsx
+import React, { ReactNode } from 'react';
+
+type ButtonProps = {
+  onClick: () => void;
+  styleType?: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'm' | 'd' | 'lx'; // 사이즈 옵션 추가
+  children: ReactNode;
+};
+
+const Button: React.FC<ButtonProps> = ({ onClick, styleType = 'primary', size = 'm', children }) => {
+  const getButtonStyle = () => {
+    switch (styleType) {
+      case 'secondary':
+        return 'bg-gray-500 text-white';
+      case 'danger':
+        return 'bg-red-500 text-white';
+      default:
+        return 'bg-blue-500 text-white';
+    }
+  };
+
+  const getSizeStyle = () => {
+    switch (size) {
+      case 'sm':
+        return 'w-20 h-8 text-sm'; // 작은 사이즈
+      case 'm':
+        return 'w-32 h-10 text-base'; // 중간 사이즈 (기본값)
+      case 'd':
+        return 'w-40 h-12 text-lg'; // 큰 사이즈
+      case 'lx':
+        return 'w-48 h-14 text-xl'; // 매우 큰 사이즈
+      default:
+        return '';
+    }
+  };
+
+  return (
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded ${getButtonStyle()} ${getSizeStyle()}`}
+    >
+      {children}
+    </button>
+  );
+};
+
+export default Button;
+```
+
+- [button 에 '아이콘' 을 넣는 기능을 추가 하고 싶을 경우] 1) 기존 Button 본체의 props 를 수정하는게 아니라 2) children 으로 들어갈 수 있게 하고 3) 컴포넌트를 하나 더 만든다. 
+
+```ts
+// components/IconButton.tsx
+import React from 'react';
+import Button from './Button';
+import { IconType } from 'react-icons';
+
+type IconButtonProps = {
+  icon: IconType;
+  label: string;
+  onClick: () => void;
+  styleType?: 'primary' | 'secondary' | 'danger';
+  size?: 'sm' | 'm' | 'd' | 'lx';
+};
+
+const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, label, onClick, styleType, size }) => {
+  return (
+    <Button onClick={onClick} styleType={styleType} size={size}>
+      <Icon className="mr-2 inline-block" />
+      {label}
+    </Button>
+  );
+};
+
+export default IconButton;
+
+```
