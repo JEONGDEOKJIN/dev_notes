@@ -219,7 +219,7 @@ taxiDriver.runTaxi();
 - 리액트 컴포넌트에서 '확장' 방식 중 하나는 children 을 사용
 ```
 
-### 
+### button 컴포넌트에 '기능을 추가' 하고 싶으면, 확장 기능(extend) 으로써 children 을 사용하기 
 
 - buton 컴포넌트 
 ```ts
@@ -301,3 +301,66 @@ const IconButton: React.FC<IconButtonProps> = ({ icon: Icon, label, onClick, sty
 export default IconButton;
 
 ```
+
+### HOC 를 이용한 extend 
+
+- Problem:
+You have a DataDisplay component that shows data. You want to add a loading indicator when the data is being fetched, but without modifying the DataDisplay component itself.
+
+- Solution:
+We’ll use a Higher-Order Component (HOC) called withLoadingIndicator to add a loading feature.
+
+- Step 1: Define the DataDisplay Component
+This component simply displays data it receives as props.
+
+```js
+const DataDisplay = ({ data }) => (
+  <div>
+    <h1>Data:</h1>
+    <p>{data}</p>
+  </div>
+);
+
+export default DataDisplay;
+
+```
+
+- Step 2: Create the withLoadingIndicator HOC
+The HOC will wrap the DataDisplay component and show a loading message if data is still being fetched.
+
+```js
+const withLoadingIndicator = (WrappedComponent) => {
+  return ({ isLoading, ...props }) => {
+    if (isLoading) {
+      return <p>Loading...</p>; // Show loading indicator
+    }
+    return <WrappedComponent {...props} />; // Render original component
+  };
+};
+
+```
+
+Step 3: Use the HOC to Create an "Extended" Component
+We’ll create a new component that has the loading feature.
+
+```js
+const DataDisplayWithLoading = withLoadingIndicator(DataDisplay);
+```
+
+Step 4: Use DataDisplayWithLoading in Your App
+Now, you can use DataDisplayWithLoading and control whether it shows the loading message or the actual data.
+
+```js
+const App = () => {
+  const isLoading = true; // or false, depending on the loading state
+  const data = "Here is some data";
+
+  return <DataDisplayWithLoading isLoading={isLoading} data={data} />;
+};
+```
+
+- summary 
+  - Original Component: DataDisplay just displays data, without any loading logic.
+  - Higher-Order Component: withLoadingIndicator takes DataDisplay and wraps it to add loading logic. It checks the isLoading prop, and if true, it shows "Loading...". Otherwise, it renders the original DataDisplay component.
+  - Extended Component: DataDisplayWithLoading now has the added loading feature, but the DataDisplay component remains unchanged.
+  - This way, you "extend" DataDisplay with a loading feature, achieving the Open/Closed Principle by keeping DataDisplay closed for modification but open for extension.

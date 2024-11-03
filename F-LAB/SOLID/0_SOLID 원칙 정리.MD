@@ -96,17 +96,87 @@ CF. 아직, '테스트 하기 쉬운 코드' 가 뭔지 모르겠음 (#📛📛�
 
 ## Single responsibility principle (SRP)
 
+1. 코드를 보고, 모듈 간의 관계도를 그림으로 계속 연상하자.
+![Image](https://i.imgur.com/Jr9Ro21.png)
+
+2. '`동사 + 명사` 형태로 된 모듈 이름으로 추측할 수 있는 기능' 여부 
+```
+추측할 수 없으면 -> '분리' 를 해서 -> 별도의 모듈(모듈화) 로 만든다.
+참고 : F-LAB\SOLID\1_단일책임원칙_코드예제.MD
+```
+
+3. '다른 곳에 재사용 할 것 인지 여부' 
+```
+다른 곳에 범용적으로 사용할 것 같으면 -> '분리' 를 해서 -> 별도의 모듈(모듈화) 로 만든다.
+참고 : F-LAB\SOLID\1_단일책임원칙_코드예제.MD  
+```
+
+4. 'UI 데이터 바인딩 컴포넌트' 와 '이벤트 수집 및 핸들러 컴포넌트' 는 분리한다. (Container-Presenter Pattern)
+```
+참고 : F-LAB\응집도, 결합도\참고자료.md
+```
+
+<br />
 
 ## Open/closed principle (OCP)
 
+1. '기능이 추가' 되어야 하는 상황이 핵심 
+
+2. '기능 추가의 방법' 으로써 1) '원본 코드를 수정' 하는게 아니라 2) 상속 같은 extend 를 쓰고 3) react 컴포넌트에서는 children 응 사용
+
+3. Hoc 를 사용하기도 하는데, 이 부분은 좀 더 공부가 필요해 
+
+<br />
 
 ## Liskov Substitution Principle (LSP)
-
+- 패스 
 
 ## Interface Segregation Principle (ISP)
+- 인터페이스 차원에서의 관심사 분리라고 생각. 
 
+<br />
 
 ## Dependency Inversion Principle (DIP)
 
+1. '상위 모듈' 이 '하위 모듈의 구체적인 구현' 에 '의존' 하지 않는다. 
+
+```js
+- 여기에서 '상위 모듈' 이 무엇이고, '하위 모듈' 은 '사람의 인지적인 개념' 이다. 
+    ex) '알림 서비스' vs 'email, sms' 는 상하 관계다. 알림 서비스 중 email, 과 sms 의 다양한 방식이 있을 수 있기 때문. 
+
+- '구체적 구현에 의존' 한다는 건, 상위 모듈 안에서, 하위 모듈 클래스를 실행시킨다는 것을 의미. 
+    ex) 
+    // 상위 모듈: 알림 서비스
+        class NotificationService {
+        private emailSender: EmailSender;
+
+        constructor() {
+            this.emailSender = new EmailSender(); // EmailSender에 직접 의존
+        }
+
+        notify(message: string) {
+            this.emailSender.send(message);
+        }
+        }
+
+```
+
+2. '상위 모듈' 이 **추상화(인터페이스)** 에 의존하도록 한다. 
+
+
+3. '상위 모듈' 은 직접적으로 emailSender, SMSSender 와 같은 구체적 구현을 알 필요가 없다. (#📛📛📛 대체 왜 😢😢😢 이건 class 문법에 익숙하지 않아서 그런 것 같다!!)
+
+
+
+
+<br />
+
+
+# 추가 공부할 것 
+- class 문법 익숙하게 만들기
+
+
+<br/>
 
 # 출처 
+- f-lab 아티클 : https://bit.ly/3YROtqb
