@@ -403,6 +403,47 @@ $
 
 
 
+# git flow init 부터 시작하기 
+
+1. `git flow init` 부터 시작한 경우
+```bash
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/1004_diary_3/1004ilg-web-1 (develop-1)
+$ git flow feature start login develop-1  ## ✅ develop-1 을 해서, 여기를 기준으로 feature 브랜치가 파지도록! 
+Fatal: Not a gitflow-enabled repo yet. Please run 'git flow init' first.
+
+nextinnovation@DESKTOP-LHQ5S8E MINGW64 ~/Desktop/NextInnonavtion/projects/1004_diary_3/1004ilg-web-1 (develop-1)
+$ git flow init
+
+Which branch should be used for bringing forth production releases?
+   - develop
+   - develop-1
+   - feature/main
+   - main
+Branch name for production releases: [main] 
+
+Which branch should be used for integration of the "next release"?
+   - develop
+   - develop-1
+   - feature/main
+Branch name for "next release" development: [develop] develop-1
+
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [C:/Users/nextinnovation/Desktop/NextInnonavtion/projects/1004_diary_3/1004ilg-web-1/.git/hooks]
+```
+
+2. `git flow init` 부터 시작한 경우, develop-1 을 기준으로 브랜치가 파졌다는 것을 알 수 있는 글
+![Image](https://i.imgur.com/PbLD1ti.png)
+
+
+
+
+
 # 익스텐션
 ```bash
 cntrl + w 활용해서 좌우 대칭되어서 생성되게 하기  
