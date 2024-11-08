@@ -1,5 +1,41 @@
 # git flow
 
+## develop-1 브랜치를 기준으로 git flow로 feature 를 파고, merge 하기 (241022) 
+```bash
+# develop-1 최신화 
+	git switch develop-1
+	git pull    # CF. git pull origin develop-1 이것과 동일하게, 현재 브랜치에 있는 것을 가져오는 명령어가 git pull
+
+# 현재 develop-1 기준으로 feature 브랜치 파기
+  현재 develop-1 브랜치에 있는지 확인
+	git flow feature start customerCenter develop-1    # 시작을 develop-1 기준으로 파면, finish 할 때도, 여기를 기준으로 파짐
+
+# 기능 개발 
+	(불라불라)
+
+# feature 에 커밋하기 
+	git add .
+	git commit -m "commit message"
+	git push origin feature/<feature-name>
+
+# merge 전 최신화 코드 인지 확인하기 
+	git switch develop-1 #develop-1 브랜치로 이동
+	git pull # git pull origin develop-1 과 동일. 왜냐면, 현재 develop-1 브랜치에 있기 때문
+	
+# feature 에 한거를 develop-1 에 merge 하기 
+	git switch feature/000 #feature 브랜치로 이동하기 #⭐⭐⭐
+	git flow feature finish customerCenter develop-1  # 합치기 # 이때, start 를 develop-1 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
+  esc > :wq! 로 편집기 빠져 나오기
+	충돌 해결 
+	제대로 충돌 해결 되었는지, 원격 develop-1 의 코드와 최종 확인 
+	develop-1 에 push 
+
+```
+
+
+
+
+
 
 ## release-1.0.0 브랜치를 기준으로 git flow로 feature 를 파고, merge 하기 (241022) 
 ```bash
