@@ -37,7 +37,7 @@ You provided a 'value' prop to a form field without an 'onChange' handler. This 
 <br />
 
 
-## 왜, 위와 같은 에러가 왜 발생하는 건가? 
+## 왜, 위와 같은 에러가 왜 발생하는 건가? (#mutable, read-only)
 
 1. [사전 전제] 리액트는 input form이 read-only 상태인가, mutable 상태인가에 따라서, '값을 받는 방식 및 attribute 가 다름' 
 
@@ -55,7 +55,8 @@ You provided a 'value' prop to a form field without an 'onChange' handler. This 
 
 ```
 
-- 리액트에서 해당 input 태그가 mutable 인 경우
+## react 에서 form 을 다루는 일반적인 방식 (#useState 의 state 가 '신뢰 가능한 단일 출처' 가 된다. #제어 컴포넌트)
+- 리액트에서 해당 input 태그가 mutable 인 경우 (#⭐⭐⭐⭐⭐ 이게 React 에서 form 을 다루는 방식)
 ```js
 const DeliveryForm = () => {
 
@@ -89,7 +90,11 @@ return (
 
 
 
-## 우테코 
+## 신뢰 가능한 단일 출처에 대해서 (#우테코) 
+
+- '신뢰 가능한 단일 출처' 란? 
+  : '하나의 상태' 는 '한 곳' 에만 있어야 한다. 
+
 - '신뢰 가능한 단일 출처(single source of truth)' 원칙을 지키는데 있어서, 기존 HTML 태그는 문제가 된다? 
 
 - '제어 컴포넌트' 는, FORM 의 사용자 입력값을, REACT 가 제어
@@ -97,7 +102,7 @@ return (
     - value, onChange 를 사용한다. 
 
 
-- 제어 
+## 신뢰가능한 단일 출처의 관점에서 제어 컴포넌트 
 ```
 - name state(useState 의 첫 번째 인자)가, '신뢰 가능한 단일 출처' 가 된다.
 - 즉, value 속성 + state 를 결합 -> state 를 '신뢰 가능한 단일 출처' 로 사용함.
@@ -108,8 +113,13 @@ return (
 
 
 
-- 비제어 
+## 신뢰가능한 단일 출처의 관점에서 비제어 컴포넌트 
 ```
+- react 가 form 의 입력값을 제어하지 않는다. 
+
+- 그럼 누가? 어떻게? 
+
+- 
 이 경우, value 속성이, '신뢰 가능한 단일 출처' 를 갖게 된다. 
 ```
 
