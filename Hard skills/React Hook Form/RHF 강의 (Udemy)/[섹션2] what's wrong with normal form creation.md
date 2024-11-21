@@ -1,6 +1,9 @@
 
+## Intro
 
-## React 에서 제어 컴포넌트 방식으로 form 데이터 다루기 
+
+
+## React 에서 제어 컴포넌트 방식으로 form 데이터 다루기 (출처 : 7. Difficulties with Normal Ways of Creating React Forms)
 
 - 주요 기능 
 ```
@@ -9,8 +12,6 @@
 - 유효성 검사
 - 에러 메시지
 ```
-
-
 
 ```jsx
 import React, { useState, ChangeEvent, SyntheticEvent } from "react";
