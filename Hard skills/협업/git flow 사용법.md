@@ -21,7 +21,7 @@
 # merge 전 최신화 코드 인지 확인하기 
 	git switch develop-1 #develop-1 브랜치로 이동
 	git pull # git pull origin develop-1 과 동일. 왜냐면, 현재 develop-1 브랜치에 있기 때문
-	
+	ma
 # feature 에 한거를 develop-1 에 merge 하기 
 	git switch feature/000 #feature 브랜치로 이동하기 #⭐⭐⭐
 	git flow feature finish customerCenter develop-1  # 합치기 # 이때, start 를 develop-1 을 기준으로 만들었기 때문에, 자동으로 그곳에 붙을 것 이라는 가정
