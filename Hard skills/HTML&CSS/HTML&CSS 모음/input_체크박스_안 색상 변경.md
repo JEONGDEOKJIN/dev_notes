@@ -66,3 +66,107 @@
     )}
 </button>
 ```
+
+
+### 3. image 넣어서 변경하기 - v2
+
+- svg 사이즈를 변경하면, 클릭했을 때 나오는 이미지 자체가 작아짐
+![Image](https://i.imgur.com/4bf8Du8.png)
+
+- 그 다음 공통 컴포넌트 Radio 의 config 값을 변경 
+```jsx
+import { useFormContext } from "react-hook-form";
+
+import classNames from "classnames";
+
+import { CommonItems } from "@/types/interface/common";
+import { useEffect } from "react";
+
+export interface IFormRadio {
+  name: string;
+  items: CommonItems[];
+  rules?: any;
+  disabled?: boolean;
+  defaultValue?: string; // 기본값 추가
+}
+
+const Radio = ({ name, rules, items, disabled, defaultValue }: IFormRadio) => {
+  const {
+    register,
+    formState: { errors },
+    setValue, // 기본값 설정용
+    getValues, // 현재 값 가져오기
+  } = useFormContext();
+
+  // defaultValue가 있을 때 한 번만 실행
+  useEffect(() => {
+    if (defaultValue && getValues(name) !== defaultValue) {
+      setValue(name, defaultValue, { shouldValidate: true });
+    }
+  }, [defaultValue, name, setValue, getValues]);
+
+  const errorMessages = errors[name] ? errors[name]?.message : "";
+  const hasError = !!(errors && errorMessages);
+
+  return (
+    <>
+      <div className="flex flex-row flex-wrap gap-[10px]">
+        {items?.map(({ label, value }: CommonItems) => (
+          <div
+            key={value}
+            className={classNames(
+              ContainerCommonConfig,
+              !disabled && "cursor-pointer",
+            )}
+          >
+            <input
+              id={label}
+              type="radio"
+              value={value}
+              disabled={disabled}
+              {...register(name, rules)}
+              defaultChecked={value === defaultValue} // 기본값 설정
+              className={classNames(
+                HiddenInputConfig,
+                !disabled && "cursor-pointer",
+              )}
+            />
+
+            <label
+              htmlFor={label}
+              className={classNames(
+                SizeCommonConfig,
+                TriggerCommonConfig,
+                !disabled &&
+                  "cursor-pointer  hover:bg-[url('/icons/icon_radio-checked.svg')]",
+              )}
+            ></label>
+            <label
+              htmlFor={label}
+              className={classNames(
+                !disabled && "cursor-pointer text-[17px] font-[350]",
+              )}
+            >
+              {label}
+            </label>
+          </div>
+        ))}
+      </div>
+      {hasError && (
+        <span className="text-warning">- {errorMessages as string}</span>
+      )}
+    </>
+  );
+};
+
+export default Radio;
+
+const ContainerCommonConfig = "flex items-center gap-[5px]";
+
+const HiddenInputConfig =
+  "hidden [&:checked+label]:bg-[url('/icons/icon_radio-checked.svg')]";
+
+const SizeCommonConfig = "w-[17px] h-[17px]";
+
+const TriggerCommonConfig = " bg-[url('/icons/icon_radio-unchecked.svg')]";
+```

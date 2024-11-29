@@ -20,3 +20,70 @@ ex) 대충 적고 브라우저를 껐음 -> 1) 세션 : 날아감 2) 로컬 스�
 
 인원추가로도 등록할 수 있고, 밑에 테이블로도 등록할 수 있는거지? "
 ```
+
+
+# 기본 React Hook Form flow 
+
+
+- 참고 : C:\Users\nextinnovation\Desktop\DJ-DEV\dev_notes\Hard skills\HTML&CSS\HTML&CSS 모음\datePicker_cloneElement 사용해서 UI 와 이벤트 로직 분리하기.md
+
+`### 달력에서 날짜를 선택하면(onChange이벤트가 발생하면) -> 날짜 형식을 수정해서 -> 공통컴포넌트인 Input 이 받게 하기`
+
+
+
+### 1. 필드에 등록함 
+```jsx
+ const methods = useForm<FormInput>({
+    mode: "onBlur",
+    defaultValues: {
+      title: "",
+      content: "",
+
+      // 학생 검색 박스 > datePicker > 선택된 날짜에 대한 필드 (#TODO: 목록 조회 할 때, 이게 API 에 들어가야 함)
+      mainPage_diary_selectedDate: new Date().toISOString().split("T")[0], // 기본값: "yyyy-MM-dd" 형식
+      
+      mainPage_memobox_title: "",
+    
+    },
+  });
+```
+
+
+### 2. provider 의 영향 범위 내에 있는지 확인 
+
+
+### 3. 사용 원하는 컴포넌트에서 
+```jsx
+const SingleDatePicker: React.FC<ISingleDatePicker> = ({ name }) => {
+  const { setValue, getValues } = useFormContext<FieldValues>();
+  const date = getValues(name);
+
+
+3-1) pull 가져오려면 
+// 2. 값을 pull 할 때, ... 으로 넣어줘야 value 에 RHF 내부에서 들어갈 수 있음
+  <input
+    ...
+    {...(register && register(name, rules))}
+  >
+  </input>
+
+이렇게 되어 있어야 하고 
+
+3-2) pull 메서드는 getValues 
+
+3-3) push 메서드는           setValue(`${name}.period`, '직접선택');
+사용
+
+```
+
+
+
+# 궁금한 것 
+
+```jsx
+    <FormProvider {...methods}>
+
+이걸 왜 해야 하는거지? 
+모달에서 이걸 넣었을 때, 문제가 되지는 않나? 
+좀 꼬이지는 않나? 
+```
