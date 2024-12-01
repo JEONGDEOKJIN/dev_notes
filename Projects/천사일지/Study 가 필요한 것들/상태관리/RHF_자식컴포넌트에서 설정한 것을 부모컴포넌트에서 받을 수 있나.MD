@@ -104,18 +104,45 @@ It means the child component is creating its own independent form context, which
     - RHF 은 PAGE 최상단에서 관리되게 하면 된다.
 
 - RHF 와 컴포넌트별 useState 의 차이는 (#⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐)
-    - RHF 은 API에 싣는 PAYLOAD 과 직결? 
+    - RHF 은 API에 싣는 PAYLOAD 과 직결?
+      : RHF 안에서 onSubmit 이벤트를 처리할 수 있기 때문에, 자연스럽게 그렇게 되는 것 같음. 
     - useState 는 UI 상태 표시에 집중?
+      : 체크 박스의 경우 그러했음
 
 ```
 
-### MainPage 
+### MainPage에서 필드 설정하고, provider 로 child 에게 
+form context 제공하고, 자식 컴포넌트에서 pull, 및 update 해서 사용하기 (#중요한 건, useForm 을 기준으로 form context 가 제공된다는 것)
 
 ```jsx
 // 초기화에 필드 추가하기 
+  const methods = useForm<FormInput>({
+    mode: "onBlur",
+    defaultValues: {
+      title: "",
+      content: "",
+
+      // 학생 검색 박스 > datePicker > 선택된 날짜에 대한 필드 (#TODO: 목록 조회 할 때, 이게 API 에 들어가야 함)
+      mainPage_diary_selectedDate: new Date().toISOString().split("T")[0], // 기본값: "yyyy-MM-dd" 형식
+      mainPage_memobox_title: "",
+    },
+  });
+
+// FormProvider 로 자식에게 context 를 제공
+   <MainPageLayout>
+      <FormProvider {...methods}>
+      ...
+      </FormProvider>
+   </MainPageLayout>
 
 
+// 자식 컴포넌트에서 PULL, UPDATE, 하는 경우 
+  // watch 사용해서 PULL 하기 
+  const { watch, setValue } = useFormContext(); // Access parent form context
+  const selectedRowsIdArr = watch("selectedRowsIdArr", []); // Watch shared field
 
+  // setValue 사용해서 UPDATE 하기
+  setValue("selectedRowsIdArr", updatedSelection); // Update shared state
 
 
 
