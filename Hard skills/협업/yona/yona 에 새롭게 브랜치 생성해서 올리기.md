@@ -18,7 +18,7 @@
 
 - 그러면 이렇게 해보자 
     1. Yona 원격 저장소 추가:
-    git remote add yona https://busiman1@yona.nextinnovation.kr/si/1004bang-ilg-web
+    git remote add yona-2 https://busiman1@yona.nextinnovation.kr/si/1004bang-ilg-web
 
 
     2. 원격 저장소 목록 확인
