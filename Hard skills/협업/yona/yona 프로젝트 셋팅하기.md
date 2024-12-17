@@ -1,8 +1,4 @@
 
-
-
-
-
 # git 설치 
 ```bash
 $ git init
