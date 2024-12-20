@@ -34,9 +34,6 @@
 
 
 
-
-
-
 ## release-1.0.0 브랜치를 기준으로 git flow로 feature 를 파고, merge 하기 (241022) 
 ```bash
 # release-1.0.0 최신화 
@@ -334,6 +331,10 @@ $ git flow feature finish delivery
 ```
 
 
+
+
+
+
 ## 241010 git flow 작업 
 
 ![Image](https://i.imgur.com/eCrzOh6.png)
@@ -484,3 +485,26 @@ Hooks and filters directory? [C:/Users/nextinnovation/Desktop/NextInnonavtion/pr
 ```bash
 cntrl + w 활용해서 좌우 대칭되어서 생성되게 하기  
 ```
+
+
+
+# [이슈]
+
+### 사용하면서, conflict 가 났음. 이 부분을 해결하면, 기존의 feature 브랜치가 아무리 git flow feature finish 를 해도 제거되지 않는 문제가 있었음 (#📛이슈) 
+
+
+```bash
+# 문제가 발생하는 이유 
+
+1. git flow feature finish 를 하면, 
+  1-1) develop 으로 체크아웃 하고 
+  1-2) develop 기준으로 merge 를 시도함 
+  1-3) 이때, conflict 가 발생하면, git flow feature finish 동작이 멈춘다. 
+  1-4) 그러면, 나는, conflict 를 수동으로 해결하고 -> conflict 해결한 것을 "conflict 해결" 이라는 commit 을 한다. 
+        - 이때, push 까지는 하지 않아도 될 것 같다. 
+        - 음.. 그런데, push 를 하더라도, 문제는 없다. push 된 상태에서 다시 git flow feature finish 를 하면 된다. 
+  1-5) 다시, gif flow feature finish 를 해야 한다. 
+
+```
+
+![Image](https://i.imgur.com/dRJEisn.jpeg)
