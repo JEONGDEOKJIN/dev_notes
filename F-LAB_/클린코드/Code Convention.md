@@ -12,7 +12,7 @@ components
 
 ```
 
-## components 
+## components.
 
 ### 요약 
 ```
