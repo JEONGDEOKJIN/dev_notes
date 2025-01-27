@@ -1,10 +1,9 @@
 # 참고자료
 
-### 타입 스크립트를 위한 클린코드
+- 타입 스크립트를 위한 클린코드 [clean-code-typescript](https://738.github.io/clean-code-typescript/) https://738.github.io/clean-code-typescript/
 
-[clean-code-typescript](https://738.github.io/clean-code-typescript/)
+- clean code 원칙을 코드레벨에서 적용할 때 만나게 되는 이슈들을 명확하게 적어본다. 적는 과정에서 문제가 명확해진다. 
 
-https://738.github.io/clean-code-typescript/
 
 # 변수
 
