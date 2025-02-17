@@ -5,6 +5,25 @@
 
 # [250217] handlerKey 값을 입력할 수 있게 만들기 (#이때, '유지보수' 가 가능하게, 접두사를 사용 #⭐⭐⭐)
 
+![Image](https://i.imgur.com/AA06nRt.jpeg)
+
+
+### 아이디어 
+```
+1. UI 데이터 타입, API 데이터 타입 을 명확히 구분 
+
+2. UI 데이터 타입에 viewModel 을 붙여서 명확히 함 
+
+3. handler 를 지정할 때, 실제 key 이름을 넣어서 명확히 들어가게 함 
+    - 이때, 타입 이름 지정이 아니라, 'handler 만의 규칙을 갖고 있는 네이밍' 을 지정 
+    - 그래서 1) 유지보수가 쉽고 2) 확장성이 용이 하게 설정 
+
+4. 기본적으로는 어제 만든 흐름대로 구현 
+```
+
+
+### 구현 코드 (#250217 까지 구현한)
+
 ```tsx
   const { bindingDataFactory } = getPageBindData("viewModel_orderDetail", {
     orderCancelHistory,
