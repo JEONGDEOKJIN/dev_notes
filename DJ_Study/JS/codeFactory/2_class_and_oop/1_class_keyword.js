@@ -65,3 +65,4 @@ class IdomModel2 {
 
 const yujin2 = new IdomModel2("안유진", 2003);
 console.log(yujin2);
+
