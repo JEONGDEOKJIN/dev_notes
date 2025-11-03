@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>basic html page</title>
+  </head>
+  <script>
+    function handleSubmit (event){
+      event.preventDefault();
+      alert('제출 완료')
+      return false; // 페이지 이동 막기 (#왜 막히지❓)
+    }
+    
+  </script>
+  <body>
+    <h1>HTML is cool</h1>
+
+    <!-- 우클릭 > 이미지 주소 복사 -->
+    <img src="https://images.unsplash.com/photo-1761839258044-e59f324b5a7f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171" alt="HTML 이미지" > 
+
+    <p>HTML 의 구성요소 </p>
+
+    <ul> 
+      <li>요소(element)</li>
+      <li>태그(tag)</li>
+      <li>콘텐츠(contents)</li>
+    </ul>
+
+    <p>HTML 이란, ‘연결’ 입니다. HTML에는 2가지  유형의 텍스트가 있습니다. 1) text to be displayed 2) how to display it!!! 두 번째 텍스트는 ‘어떻게 보여질 지에 대한 명령어’ 이고 이것이 태그 입니다. 태그는 여는 태그와 종료 태그가 있고, 여는 태그과 종료 태그는 서로 '짝' 이 맞게 쓰여야 합니다. </p>
+
+    <p>더 자세한 내용이 궁금하면 여기 <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax">MDN 문서 </a> 
+      를 참고 하세요. </p>
+
+      <!-- <form action="/search" method="get">
+        <label for="keyword">검색어</label>
+        <input type="text" id="keyword" name="keyword" value="HTML">
+        <button type="submit" >검색</button>
+      </form> -->
+
+
+      <!-- action 은 서버에게 요청하는 URL? 그럼 서버는 해당 url 로 리턴. 그러면, 클라이언트가 요청하는 주소이자, 서버가 반환하는 주소?  -->
+      <form action="/search" method="get" > 
+        <label for="keyword">키워드</label>
+        <!-- input 의 id 와 name 의 구분? | name 으로 하니까 form 객체 생성이 되는데? id 는 input 태그 자체의 것?   -->
+        <!-- <input type="text"  name="keyword" value="2"> -->
+        
+        <!-- button 의 type 은 항상 button? submit 과의 차이? -->
+         <!-- 아, 여기 타입을 button 으로 하니까, 안 되는데?  -->
+          <!-- <input type="email" name="email" > -->
+          
+          <textarea name="message" ></textarea>
+
+      </form>
+
+      <!-- submit 타입 -->
+      <!-- <form action="/" onsubmit="return handleSubmit(event)"> 
+          <button type="submit">제출</button>
+      </form> -->
+      
+      <!-- button 타입 -->
+      <form action="/" > 
+          <button type="button" onclick="handleSubmit(event)">제출2</button>
+      </form>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <!-- <input type="button" name="button" value="버튼문구" /> -->
+      <input type="text" name="text"/><br>
+      <br>
+      <br>
+
+
+  </body>
+</html>
