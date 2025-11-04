@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .manArea {
+            padding: 20px;
+            background-color: lightblue;
+            cursor: pointer;
+        }
+
+        .womanArea {
+            padding: 20px;
+            background-color: rgb(228, 230, 173);
+            cursor: pointer;
+        }
+
+        form {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <br>
+    <br>
+    <br>
+    <form action="/" method="get">
+        <label class="manArea" for="genderMan">남</label>
+        <input type="radio" id="genderMan" name="gender" value="man">
+        <label class="womanArea" for="genderWoman">여</label>
+        <input type="radio" id="genderWoman" name="gender" value="woman">
+        <button type="submit">제출</button>
+    </form>
+
+
+    <dialog open>
+        <p>환영합니다!</p>
+        <form method="dialog">
+            <button>확인</button>
+        </form>
+    </dialog>
+
+</body>
+
+</html>

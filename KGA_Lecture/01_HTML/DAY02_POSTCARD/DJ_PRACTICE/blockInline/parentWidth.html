@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block 요소 - 부모 너비 차지</title>
+    <style>
+        /* 부모 컨테이너들 */
+        .parent-wide {
+            width: 800px;
+            background-color: #e0e0e0;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 3px solid #333;
+        }
+        
+        .parent-medium {
+            width: 400px;
+            background-color: #e0e0e0;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 3px solid #333;
+        }
+        
+        .parent-narrow {
+            width: 200px;
+            background-color: #e0e0e0;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 3px solid #333;
+        }
+        
+        /* Block 자식 요소 */
+        .block-child {
+            background-color: #4a90e2;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            /* width를 지정하지 않음 - 부모의 전체 너비 차지 */
+        }
+        
+        /* 설명 라벨 */
+        .label {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .parent-wide .first {
+        width: 100px;
+        background-color: aqua;
+        border: 5px solid blue;
+    }
+    .widthTest{
+        width: 100px;
+        background-color: aqua;
+    }
+
+    </style>
+</head>
+<body>
+    <h1>Block 요소: 부모의 너비에 따른 변화</h1>
+    
+    <!-- 넓은 부모 -->
+    <div class="label widthTest">부모 너비: 800px</div>
+    <div class="parent-wide">
+        <div class="block-child first">Block 요소 1</div>
+        <div class="block-child">Block 요소 2</div>
+    </div>
+    
+    <!-- 중간 부모 -->
+    <div class="label">부모 너비: 400px</div>
+    <div class="parent-medium">
+        <div class="block-child">Block 요소 1</div>
+        <div class="block-child">Block 요소 2</div>
+    </div>
+    
+    <!-- 좁은 부모 -->
+    <div class="label">부모 너비: 200px</div>
+    <div class="parent-narrow">
+        <div class="block-child">Block 요소 1</div>
+        <div class="block-child">Block 요소 2</div>
+    </div>
+    
+    <hr style="margin: 40px 0;">
+    <h2>결론</h2>
+    <p><strong>부모가 작아지면?</strong> → Block 자식 요소도 자동으로 부모 너비에 맞춰집니다!</p>
+</body>
+</html>

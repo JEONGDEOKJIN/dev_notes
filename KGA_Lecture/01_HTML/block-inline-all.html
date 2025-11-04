@@ -6,11 +6,60 @@
     <title>Document</title>
 </head>
 <style>
+    .block {
+        background-color : lightblue
+    }
+    .blockText {
+        color: lightblue;
+    }
     
+    .inline {
+        background-color: rgb(243, 191, 191);
+    }
+    .inlineText {
+        color: rgb(243, 191, 191);
+    }
 
 </style>
 <body>
+    <h1 class="blockText">block</h1>
+
     <h1 class="block">h1</h1>
+    <div class="block" >div</div>
+    <p class="block" >p</p>
+    <ul class="block">
+        <li>ul과 li</li>
+        <li>ul과 li</li>
+    </ul>
+    <ol class="block">
+        <li>ol과 li</li>
+        <li>ol과 li</li>
+    </ol>
+    <form class="block" action="">
+        form
+    </form>
+
+
+    <br>
+    <br>
+    <h1 class="inlineText">inline</h1>
+
+    <span class="inline">span</span>
+    <a href="" class="inline">a태그</a>
+
+    <label for="">텍스트</label>
+    <input type="text" class="inline">
     
+    <label class="inline" for="">체크박스</label>
+    <input type="checkbox" class="inline">
+
+    <label class="inline" for="">라디오버튼</label>
+    <input type="radio" class="inline">
+    
+    <button type="button" class="inline">버튼</button>  
+
+
+
+
 </body>
 </html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            border: 3px dashed #ff6b6b;
+            background: #fff5f5;
+            position: relative;
+        }
+
+        .quizBox {
+            background: #e8eeff;
+            border: 1px solid #667eea;
+            text-align: center;
+        }
+
+        .sibling {
+            border: 3px dashed #ff6b6b;
+            background: #fff5f5;
+            position: relative;
+            text-align: center;
+        }
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ------------------------------------------------ -->
+    <h3>Q1 : Quiz Box 의 주석을 해제 하면?</h3>
+    <p>
+        1-1) 퀴즈박스는  1) 'HELLO' 옆 '가로배치?' 될까요? 2) HELLO 아래 '세로배치' 될까요? <br>
+        1-2) 퀴즈박스의 width 는? (부모 컨테이너의 width 는 100%)
+    </p>
+    
+    <div class="sibling">HELLO</div>
+    <!-- <div class="quizBox">Quiz BOX</div> -->
+
+    <!-- ------------------------------------------------ -->
+
+    <h3>Q1 : Quiz Box 의 주석을 해제 하면?</h3>
+    <p>
+        1-1) 퀴즈박스는  1) 'HELLO' 옆 '가로배치?' 될까요? 2) HELLO 아래 '세로배치' 될까요? <br>
+        1-2) 퀴즈박스의 width 는? 
+    </p>
+    
+    <span class="sibling">HELLO</span>
+    <span class="quizBox">Quiz BOX</span>
+
+    <!-- ------------------------------------------------ -->
+    
+    <h3>Q1 : Quiz Box 의 주석을 해제 하면?</h3>
+    <p>
+        1-1) 퀴즈박스는  1) 'HELLO' 옆 '가로배치?' 될까요? 2) HELLO 아래 '세로배치' 될까요? <br>
+        1-2) 퀴즈박스의 width 는? 
+    </p>
+    
+    <div class="sibling" style="width: 500px;">HELLO</div>
+    <span class="quizBox">Quiz BOX</span>
+    
+    <h3>Q1 : Quiz Box 의 주석을 해제 하면?</h3>
+    <p>
+        1-1) 퀴즈박스는  1) 'HELLO' 옆 '가로배치?' 될까요? 2) HELLO 아래 '세로배치' 될까요? <br>
+        1-2) 퀴즈박스의 width 는? 
+    </p>
+    
+    <div class="sibling" style="width: 500px;">HELLO</div>
+    <span class="quizBox">Quiz BOX</span>
+
+
+    <!-- 자손 -->
+    <h3>Q2 : Quiz Box 의 주석을 해제 하면?</h3>
+    <p>
+        A) 퀴즈박스는  1) 'HELLO' 옆 '가로배치?' 될까요? 2) HELLO 아래 '세로배치' 될까요? <br>
+        B) 퀴즈박스의 width 는? (부모 컨테이너의 width 는 200px)
+    </p>
+    
+    <div class="parent" style="width: 200px;">
+        'HELLO'
+
+        <div class="quizBox">Quiz BOX</div>
+
+        이후에도 텍스트.
+    </div>
+
+
+
+</body>
+
+</html>

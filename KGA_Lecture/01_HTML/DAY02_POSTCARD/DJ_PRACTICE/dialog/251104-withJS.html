@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Dialog Method 예시</title>
+</head>
+<body>
+    <!-- 대화상자 -->
+    <dialog id="favDialog">
+        <form method="dialog">
+            <p>
+                <label for="favAnimal">좋아하는 동물:</label>
+                <select id="favAnimal" name="favAnimal">
+                    <option></option>
+                    <option>새우</option>
+                    <option>판다</option>
+                    <option>원숭이</option>
+                </select>
+            </p>
+            <div>
+                <button type="reset">취소</button>
+                <button type="submit">확인</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- 대화상자를 여는 버튼 -->
+    <button id="updateDetails">상세 정보 업데이트</button>
+
+    <script>
+        const updateButton = document.getElementById('updateDetails');
+        const dialog = document.getElementById('favDialog');
+
+        // 버튼 클릭 시 대화상자 열기
+        updateButton.addEventListener('click', () => {
+            dialog.showModal();
+        });
+    </script>
+</body>
+</html>
