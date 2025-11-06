@@ -1,0 +1,108 @@
+- 출처 : MDN [파싱](https://developer.mozilla.org/en-US/docs/Glossary/Parse)
+
+```jsx
+[전통적인 의미의 파싱] 
+"man bites dog" 
+
+영어 문장이 있다. 
+
+이 문장이 몇 형식인가? 
+man 은 '주어 자리' 에 있는 '단수 명사' 다. 
+	-> 이걸, 주어 역할을 하고 있는, 단수 명사, 다. 라고도 읽을 수 있다.
+	 
+이걸 요약하면, 
+	- man → 단수 명사 (주어)
+	- bites → 3인칭 단수 현재형 동사
+	- dog → 단수 명사 (목적어)
+	
+이렇게 읽고, '문법에 맞게 작성되었는지 여부' 까지 판단할 수 있다.
+
+이 과정을 '파싱' 이라고 함. 
+
+즉, '문장' 을 '품사' 별로 나누는 문법 교육 방법을 파싱 이라고 했다. (https://en.wikipedia.org/wiki/Parsing)  
+	
+
+[컴퓨터 과학에서의 파싱] 
+
+	'입력된 소스 코드' 를 '데이터 구조(parse tree, syntax tree 등등)' 로 변환(takes input data and builds a data structure))하여, 
+	올바른 구문인지 분석(checking for correct syntax.)한다. (출처 : https://en.wikipedia.org/wiki/Parsing) 
+
+즉, 
+- HTML 파싱 = 토큰화(tokenization) + 트리 구성(tree construction) (The browser parses HTML into a DOM tree. HTML parsing involves tokenization and tree construction. 출처 : https://developer.mozilla.org/en-US/docs/Glossary/Parse) 
+- HTML 토큰 = 시작 태그, 종료 태그, 속성 이름, 속성 값	
+	
+	CF. 토큰 이란? '의미가 있는 최소 단위' 이다. 
+			예를 들어서, <p class="text">Hello</p> 이렇게 소스 코드가 적혀 있을 때, 
+			영어 문장을, 문법 요소로 쪼개듯, 
+			이 소스 코드를, 특정 기준에 따라서 쪼갤 수 있다. 
+			그럼 왜 '토큰' 이라는 이름이 붙었을까? 
+			
+			'토큰' 의 어원은 고대 영어 "tacen"에서 유래했으며, 이는 "sign, symbol(표시, 상징)"을 의미
+			즉, '상징물' 의 의미와 가깝다. 즉, 해당 물건은 '어떤 다른 것을 의미' 하는 본질적인 성질이 있다. 
+			그것 자체가 의미다. 
+			그것을 분해하면 의미가 있을 수 없다. 
+			
+			class 는 -> 의미를 갖는다. -> 상징이 통한다. 
+			cla 까지는 -> 의미가 없다. -> 상징이 사라진다. 
+			
+			그러면, <p class="text">Hello</p> 이 소스코드에서 '의미를 갖는 단위' 들은 어디까지 일까? 
+				'<' 이거? 
+				'cla' 이거? 
+				
+			MDN 에 따르면, 토큰에는 '시작 태그, 종료 태그, 속성명, 속성값' 이 있다. 
+
+그러면, 토큰화(tokenization) 라는 건
+	'소스코드' 를 가져와서, 
+	'토큰'(시작 태그, 종료 태그, 속성 이름, 속성 값)으로, 
+	'구문 분석' 을 하는 것
+ 
+ 
+	<p class="text">Hello</p>
+
+	↓ 토큰으로 분해 (#이 토큰이, 구문(syntax) 가 된다 #⭐⭐⭐)
+
+		1. 시작 태그: <p>
+		2. 속성명: class
+		3. 속성값: text
+		4. 콘텐츠: Hello
+		4. 종료 태그: </p>
+			
+
+이렇게 토큰화된 결과를 트리구성(tree construction) 으로 변환
+		
+		
+
+```
+
+- 실제, 왼쪽 소스 코드가, 오른쪽의 Tree 구성으로 변환됨 (v1)
+
+```jsx
+<html lang="en">
+  <head>
+    <title>My Document</title>
+  </head>
+  <body>
+    <h1>Header</h1>
+    <p>Paragraph</p>
+  </body>
+</html>
+```
+
+![https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model](attachment:8f9b3535-9813-4bc5-84c1-733222494e7b:image.png)
+
+https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model
+
+- 실제, 왼쪽 소스 코드가, 오른쪽의 Tree 구성으로 변환됨 (v2)
+
+```jsx
+<p>
+  Let's use:
+  <span>HTML</span>
+  <span>CSS</span>
+  <span>JavaScript</span>
+</p>
+```
+
+![https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_browsers_load_websites](attachment:16ce4d8a-d3a4-42be-aa66-6bb371a33ccf:image.png)
+
+https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Web_standards/How_browsers_load_websites
