@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            border: 5px solid blue;
+            margin: 40px;
+        }
+
+        p {
+            border: 5px solid rebeccapurple;
+            background-color: lightgray;
+            padding: 10px;
+        }
+
+        .one {
+            margin-bottom: 50px;
+        }
+
+        /* two 의 margin-top 을 0px 로 해도 동일함! */
+        .two {
+            margin-top: 30px;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+    <h2>marginCollapse </h2>
+    <div>class 가 two 인 p 에 대해서 margin-top을 0px 로 줘도, 동일하게 margin-bottom 이 50px 이 적용됨 </div>
+    <div>왜냐면, class one의 bottom과 class two 의 top 마진이 만나서 상쇄 되었기 때문에</div>
+    <div class="container">
+        <p class="one">I am paragraph one.</p>
+        <p class="two">I am paragraph two.</p>
+    </div>
+
+</body>
+
+</html>

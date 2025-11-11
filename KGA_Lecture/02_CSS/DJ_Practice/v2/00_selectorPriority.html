@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>선택자 우선순위</title>
+    <style>
+        /* 1. 요소 선택자 (우선순위: 낮음) */
+        p {
+            background-color: lightyellow;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* 2. 클래스 선택자 (우선순위: 중간) */
+        .text {
+            background-color: lightgreen;
+        }
+
+        /* 3. ID 선택자 (우선순위: 높음) */
+        #special {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <!-- 케이스 1: 요소 선택자만 적용 -->
+    <p>1. 연노랑 배경 (tag만 적용)</p>
+
+    <!-- 케이스 2: 요소 + 클래스 선택자 -->
+    <p class="text">2. 연두색 배경 (class가 tag보다 우선)</p>
+
+    <!-- 케이스 3: 요소 + 클래스 + ID 선택자 -->
+    <p class="text" id="special">3. 하늘색 배경 (id가 가장 우선)</p>
+
+    <!-- 케이스 4: 요소 + ID 선택자 -->
+    <p id="special">4. 하늘색 배경 (id가 tag보다 우선)</p>
+</body>
+</html>

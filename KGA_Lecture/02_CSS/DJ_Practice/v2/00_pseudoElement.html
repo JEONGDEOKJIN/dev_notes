@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>의사요소 예시</title>
+    <style>
+        /* 첫 글자 강조 */
+        p::first-letter {
+            font-size: 2rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        /* 첫 줄 강조 */
+        p::first-line {
+            color: #3498db;
+        }
+
+        /* 앞에 아이콘 추가 */
+        .important::before {
+            content: "⚠️ ";
+        }
+
+        /* 뒤에 화살표 추가 */
+        .link::after {
+            content: " →";
+            color: #e74c3c;
+        }
+
+        /* 드래그 시 색상 변경 */
+        ::selection {
+            background-color: #f39c12;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        이것은 긴 문단입니다. 첫 글자는 크게 표시되고, 
+        첫 줄은 파란색으로 표시됩니다. 
+        화면 크기를 조절해도 자동으로 적용됩니다.
+    </p>
+
+    <p class="important">중요한 메시지입니다.</p>
+    <p class="link">자세히 보기</p>
+</body>
+</html>

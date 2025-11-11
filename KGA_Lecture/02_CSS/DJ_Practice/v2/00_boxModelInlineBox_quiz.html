@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font: 1.2em / 1.5 sans-serif;
+        }
+
+        .box span {
+            background-color: pink;
+            border: 5px solid black;
+            
+
+            padding: 35px 15px;
+            /* 1) 영역 확보는 되는데 2) 밀쳐내지를 못 함  */
+            /* padding: 150px 150px; */
+
+        }
+
+        .container{
+            padding-top: 50px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        
+        <div>padding : 영역 확보는 되는데, 밀치지 못 함 -> '겹침' 현상</div>
+        
+        <div class="container">
+            <p>
+                Veggies es bonus vobis, <span>proinde vos postulo</span> essum magis
+                kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki bean
+                garlic.
+            </p>
+            
+            <p>
+                Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot courgette
+                tatsoi pea sprouts fava bean collard greens dandelion okra wakame tomato.
+                Dandelion cucumber earthnut pea peanut soko zucchini.
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
