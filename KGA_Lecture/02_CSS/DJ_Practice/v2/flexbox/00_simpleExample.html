@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Sample flexbox example</h1>
+    </div class="header">
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+        }
+
+        .header {
+            background: rgb(0, 6, 128);
+            height: 100px;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            line-height: 100px;
+            margin: 0;
+        }
+
+        .article {
+            padding: 10px;
+            margin: 10px;
+            background: aqua;
+            min-width: 400px;
+            flex: 1 100px;
+        }
+
+        .section {
+            display: flex;
+            flex-wrap: wrap;
+            /* flex-direction: row-reverse; */
+        }
+
+        /* Add your flexbox CSS below here */
+    </style>
+    <div class="section">
+        <div class="article">
+            <h2>First article 클래스</h2>
+            <p>Content…</p>
+        </div>
+        <div class="article">
+            <h2>Second article 클래스</h2>
+            <p>Content…</p>
+        </div>
+        <div class="article">
+            <h2>Third article 클래스</h2>
+            <p>Content…</p>
+        </div>
+    </div class="section">
+</body>
+
+</html>
