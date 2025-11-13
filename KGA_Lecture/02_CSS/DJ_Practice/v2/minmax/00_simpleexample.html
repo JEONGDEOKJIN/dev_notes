@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrapper {
+            padding: 20px;
+        }
+
+        .wrapper div {
+            border: 5px solid gray;
+            margin: 20px;
+        }
+
+        .larger-container {
+            width: 200px;
+        }
+
+        .smaller-container {
+            width: 30px;
+        }
+
+        .width {
+            width: 100%;
+        }
+
+        .max {
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <span>
+            1. larger-container 에서 img 에 width:100% 설정 -> larger container에 맞춰짐
+        </span>
+        <div class="larger-container">
+            <img alt="star" class="width" src="https://mdn.github.io/shared-assets/images/examples/big-star.png" />
+        </div>
+
+
+        <span>
+            2. larger-container 에서 img 에 max-width:100% 설정 -> 본래 img 에 맞춰짐
+
+        </span>
+        <div class="larger-container">
+            <img alt="star" class="max" src="https://mdn.github.io/shared-assets/images/examples/big-star.png" />
+        </div>
+        
+        
+        <span>
+            3. smaller-container 에서 img 에 max-width: 100%; 설정 -> smaller container 에 맞춰짐
+        </span>
+        <div class="smaller-container">
+            <img alt="star" class="max" src="https://mdn.github.io/shared-assets/images/examples/big-star.png" />
+        </div>
+
+
+        <p>4. 본래 사이즈 : 60 x 57 </p>
+        <img alt="star" class="max" src="https://mdn.github.io/shared-assets/images/examples/big-star.png" />
+    
+    
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 30px;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .info-box {
+            background: lightyellow;
+        }
+        
+        /* 모바일 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="info-box">
+            <p>이 레이아웃은 반응형입니다. 브라우저 창을 넓히거나 좁혔을 때 어떤 일이 일어나는지 확인해 보세요.</p>
+        </div>
+        <div class="content">
+            <p>
+      이야기에 따르면 1782년 11월의 어느 밤, 프랑스의 작은 마을 아노네(Annonay)에서 두 형제가 겨울 난로가에 앉아 넓은 굴뚝으로 회색 연기 자락이 피어오르는 모습을 지켜보고 있었습니다. 그들의 이름은 스티븐과 조셉 몽골피에(Montgolfier)였으며, 직업은 제지업자였지만 깊은 사고력과 모든 과학적 지식 및 새로운 발견에 대한 지대한 관심을 가진 사람들로 알려져 있었습니다.
+    </p>
+    <p>
+      훗날 역사적인 밤으로 증명된 그날 밤 이전에도, 수억 명의 사람들이 불에서 피어오르는 연기를 보았지만 그 사실에서 특별한 영감을 얻은 사람은 아무도 없었습니다.
+    </p>
+        </div>
+    </div>
+</body>
+
+</html>
