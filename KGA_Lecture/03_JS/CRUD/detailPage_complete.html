@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 상세</title>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    .post-header {
+      border-bottom: 2px solid #333;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .post-header h1 {
+      margin: 0 0 10px 0;
+    }
+    .post-meta {
+      color: #666;
+      font-size: 14px;
+    }
+    .post-meta span {
+      margin-right: 15px;
+    }
+    .post-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    .post-content {
+      line-height: 1.8;
+      font-size: 16px;
+      padding: 20px 0;
+      white-space: pre-wrap;
+    }
+    .button-group {
+      margin-top: 30px;
+      display: flex;
+      gap: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .btn-list {
+      background: #6c757d;
+      color: white;
+    }
+    .btn-edit {
+      background: #28a745;
+      color: white;
+    }
+    .btn-delete {
+      background: #dc3545;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="post-header">
+      <h1 id="postTitle"></h1>
+      <div class="post-meta">
+        <span id="postAuthor"></span>
+        <span id="postDate"></span>
+        <span id="postViews"></span>
+      </div>
+    </div>
+    
+    <img id="postImage" class="post-image" alt="">
+    
+    <div id="postContent" class="post-content"></div>
+    
+    <div class="button-group">
+      <button id="listBtn" class="btn-list">목록으로</button>
+      <button id="editBtn" class="btn-edit">수정</button>
+      <button id="deleteBtn" class="btn-delete">삭제</button>
+    </div>
+  </div>
+
+  <script>
+    // TODO 1
+    var search = location.search;  // "?id=1234567890"
+    var postId = search.split('=')[1];  // "1234567890"
+    
+    // TODO 2
+    var savedPosts = localStorage.getItem('posts');
+    var posts = savedPosts ? JSON.parse(savedPosts) : [];
+    
+    // TODO 3
+    var post = null;
+    var postIndex = -1;
+    
+    for (var i = 0; i < posts.length; i++) {
+      if (posts[i].id === Number(postId)) {
+        post = posts[i];
+        postIndex = i;
+        break;
+      }
+    }
+    
+    if (!post) {
+      alert('게시글을 찾을 수 없습니다.');
+      location.href = 'list.html';
+    }
+    
+    // TODO 4
+    post.views = post.views + 1;
+    posts[postIndex] = post;
+    localStorage.setItem('posts', JSON.stringify(posts));
+    
+    // TODO 5
+    document.querySelector('#postTitle').textContent = post.title;
+    document.querySelector('#postAuthor').textContent = '작성자: ' + post.author;
+    document.querySelector('#postDate').textContent = '작성일: ' + post.createdAt.split('T')[0];
+    document.querySelector('#postViews').textContent = '조회수: ' + post.views;
+    document.querySelector('#postImage').src = post.image;
+    document.querySelector('#postContent').textContent = post.content;
+    
+    // TODO 6
+    var listBtn = document.querySelector('#listBtn');
+    listBtn.addEventListener('click', function() {
+      location.href = 'list.html';
+    });
+    
+    // TODO 7
+    var editBtn = document.querySelector('#editBtn');
+    editBtn.addEventListener('click', function() {
+      location.href = 'edit.html?id=' + postId;
+    });
+    
+    // TODO 8
+    var deleteBtn = document.querySelector('#deleteBtn');
+    deleteBtn.addEventListener('click', function() {
+      var confirmDelete = confirm('정말 삭제하시겠습니까?');
+      
+      if (confirmDelete) {
+        var newPosts = posts.filter(function(p) {
+          return p.id !== Number(postId);
+        });
+        
+        localStorage.setItem('posts', JSON.stringify(newPosts));
+        alert('삭제되었습니다!');
+        location.href = 'list.html';
+      }
+    });
+  </script>
+</body>
+</html>

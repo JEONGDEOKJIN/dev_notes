@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter App</title>
+</head>
+<body>
+    <div id="counter">
+        <h1 id="count">0</h1>
+        <button id="increaseBtn">증가</button>
+        <button id="decreaseBtn">감소</button>
+        <button id="resetBtn">리셋</button>
+    </div>
+    <script>
+        // TODO 1: count를 0으로 초기화하세요
+        var count = 0;
+        // DOM 요소 선택
+        var countDisplay = document.querySelector('#count');
+        var increaseBtn = document.querySelector('#increaseBtn');
+        var decreaseBtn = document.querySelector('#decreaseBtn');
+        var resetBtn = document.querySelector('#resetBtn');
+        // TODO 2: 증가 버튼 클릭 시 count를 1 증가시키고 화면에 표시하세요
+        increaseBtn.addEventListener('click', function() {
+            count = count + 1;
+            countDisplay.textContent = count;
+        });
+        // TODO 3: 감소 버튼 클릭 시 count를 1 감소시키고 화면에 표시하세요
+        decreaseBtn.addEventListener('click', function() {
+            count = count - 1;
+            countDisplay.textContent = count;
+        });
+        // TODO 4: 리셋 버튼 클릭 시 count를 0으로 만들고 화면에 표시하세요
+        resetBtn.addEventListener('click', function() {
+            count = 0;
+            countDisplay.textContent = count;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>글 작성 페이지</h1>
+    <!-- [✅TODO] 실제로 / 에 보내는게 아니라, localstorage 에 저장해야 함 -->
+    <!-- [✅TODO] 실행해야 하는 함수를 바인딩 해야 하는데, 이게 method 였나? -->
+    <form id="postForm">
+        <!--[✅TODO] 여기에서 label 태그의 for 속성과 input 태그의 id 속성을 매칭?  -->
+        <label for="titleInput">제목</label>
+        <input type="text" id="titleInput" placeholder="제목을 입력하세요" required>
+        
+        <label for="contentInput">내용</label>
+        <textarea id="contentInput" placeholder="내용을 입력하세요" required></textarea>
+        
+        <label for="imageInput">사진</label>
+        <input type="text" id="imageInput" placeholder="이미지 URL을 입력하세요">
+
+        <!-- [✅DONE] DOM 조작으로 이벤트 리스너 연결 -->
+        <button type="button" id="submitBtn">작성완료</button>
+
+    </form>
+
+    <script>
+        // ✨ DOM 조작 방식으로 이벤트 연결하기
+        
+        // 1️⃣ 페이지 로드 후 DOM 요소들을 가져오기
+        const submitBtn = document.getElementById('submitBtn');
+        const postForm = document.getElementById('postForm');
+        const titleInput = document.getElementById('titleInput');
+        const contentInput = document.getElementById('contentInput');
+        const imageInput = document.getElementById('imageInput');
+        
+        // 2️⃣ 버튼에 클릭 이벤트 리스너 추가 (DOM 조작 방식)
+        submitBtn.addEventListener('click', handleSubmit);
+        
+        // 3️⃣ 작성완료 버튼 클릭 시 실행되는 함수
+        function handleSubmit() {
+            // form에서 데이터 끄집어내기 (이미 위에서 DOM 요소를 가져왔음)
+            const title = titleInput.value;
+            const content = contentInput.value;
+            const image = imageInput.value;
+            
+            // 입력값 유효성 검사
+            if (!title.trim()) {
+                alert('제목을 입력해주세요!');
+                titleInput.focus(); // 포커스 이동
+                return;
+            }
+            
+            if (!content.trim()) {
+                alert('내용을 입력해주세요!');
+                contentInput.focus(); // 포커스 이동
+                return;
+            }
+            
+            // 게시글 데이터 객체 생성
+            const post = {
+                id: Date.now(), // 고유 ID (현재 시간 밀리초)
+                title: title,
+                content: content,
+                image: image,
+                createdAt: new Date().toISOString() // 작성 시간
+            };
+            
+            // localStorage에서 기존 게시글 배열 가져오기
+            const existingPosts = localStorage.getItem('posts');
+            const posts = existingPosts ? JSON.parse(existingPosts) : [];
+            
+            // 새 게시글을 배열에 추가
+            posts.push(post);
+            
+            // localStorage에 다시 저장 (JSON 문자열로 변환)
+            localStorage.setItem('posts', JSON.stringify(posts));
+            
+            // 성공 메시지 및 폼 초기화
+            alert('✅ 게시글이 성공적으로 저장되었습니다!');
+            postForm.reset();
+            
+            // 콘솔에 저장된 데이터 출력 (디버깅용)
+            console.log('저장된 게시글:', post);
+            console.log('전체 게시글 목록:', posts);
+            
+            // 선택사항: 목록 페이지로 이동하려면 아래 주석 해제
+            // window.location.href = 'index.html';
+        }
+        
+        // 추가: Enter 키로도 제출 가능하도록 (선택사항)
+        postForm.addEventListener('keypress', function(event) {
+            // Ctrl + Enter 또는 Cmd + Enter로 제출
+            if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+                handleSubmit();
+            }
+        });
+        
+        // 디버깅용: 저장된 모든 게시글 확인
+        function viewAllPosts() {
+            const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+            console.table(posts);
+        }
+    </script>
+
+    <script>
+
+
+    </script>
+
+</body>
+
+
+
+
+</html>

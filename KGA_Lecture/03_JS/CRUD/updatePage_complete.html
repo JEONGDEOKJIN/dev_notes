@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>게시글 수정</title>
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 200px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .btn-update {
+      background: #28a745;
+      color: white;
+    }
+    .btn-cancel {
+      background: #6c757d;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>게시글 수정</h1>
+    
+    <input type="text" id="titleInput" placeholder="제목을 입력하세요">
+    <input type="text" id="authorInput" placeholder="작성자" disabled>
+    <textarea id="contentInput" placeholder="내용을 입력하세요"></textarea>
+    <input type="text" id="imageInput" placeholder="이미지 URL을 입력하세요">
+    
+    <button id="updateBtn" class="btn-update">수정 완료</button>
+    <button id="cancelBtn" class="btn-cancel">취소</button>
+  </div>
+
+  <script>
+    // TODO 1
+    var search = location.search;
+    var postId = search.split('=')[1];
+    
+    // TODO 2
+    var savedPosts = localStorage.getItem('posts');
+    var posts = savedPosts ? JSON.parse(savedPosts) : [];
+    
+    // TODO 3
+    var post = null;
+    var postIndex = -1;
+    
+    for (var i = 0; i < posts.length; i++) {
+      if (posts[i].id === Number(postId)) {
+        post = posts[i];
+        postIndex = i;
+        break;
+      }
+    }
+    
+    if (!post) {
+      alert('게시글을 찾을 수 없습니다.');
+      location.href = 'list.html';
+    }
+    
+    // TODO 4
+    document.querySelector('#titleInput').value = post.title;
+    document.querySelector('#authorInput').value = post.author;
+    document.querySelector('#contentInput').value = post.content;
+    document.querySelector('#imageInput').value = post.image;
+    
+    // TODO 5
+    var updateBtn = document.querySelector('#updateBtn');
+    updateBtn.addEventListener('click', function() {
+      var newTitle = document.querySelector('#titleInput').value;
+      var newContent = document.querySelector('#contentInput').value;
+      var newImage = document.querySelector('#imageInput').value;
+      
+      if (newTitle === '' || newContent === '') {
+        alert('제목과 내용을 입력해주세요!');
+        return;
+      }
+      
+      posts[postIndex].title = newTitle;
+      posts[postIndex].content = newContent;
+      posts[postIndex].image = newImage;
+      
+      localStorage.setItem('posts', JSON.stringify(posts));
+      
+      alert('수정되었습니다!');
+      location.href = 'detail.html?id=' + postId;
+    });
+    
+    // TODO 6
+    var cancelBtn = document.querySelector('#cancelBtn');
+    cancelBtn.addEventListener('click', function() {
+      location.href = 'detail.html?id=' + postId;
+    });
+  </script>
+</body>
+</html>

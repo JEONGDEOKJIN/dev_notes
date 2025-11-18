@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>글 작성 페이지</h1>
+    <!-- [✅TODO] 실제로 / 에 보내는게 아니라, localstorage 에 저장해야 함 -->
+    <!-- [✅TODO] 실행해야 하는 함수를 바인딩 해야 하는데, 이게 method 였나? -->
+    <!-- [✅TODO] form 기본 동작 때문에 또 당함 -->
+    <!-- <form action="/" method=""> -->
+        <!--[✅TODO] 여기에서 label 태그의 for 속성과 input 태그의 id 속성을 매칭?  -->
+        <label for="titleInput" >제목</label>
+        <input type="text" id="titleInput" placeholder="제목을 입력하세요" >
+
+        <label for="authorInput" >저자</label>
+        <input type="text" id="authorInput" placeholder="글쓴이놈" >
+        
+        <label for="contentInput">내용</label>
+        <textarea id="contentInput" placeholder="내용을 입력하세요"></textarea>
+        
+        <label for="imageInput">사진</label>
+        <input type="text" id="imageInput" placeholder="내용을 입력하세요">
+
+        <!-- [✅TODO] 작성완료를 눌렀을 때, 데이터를 어떻게 form 에서 끄집어 내는가? -->
+        <button type="button" id="submitBtn">작성완료</button>
+
+    <!-- </form> -->
+
+    <script>
+        var submitBtn = document.querySelector('#submitBtn')
+        console.log(submitBtn)
+
+        submitBtn.addEventListener('click', function(){
+            var title = document.querySelector('#titleInput').value
+            var author = document.querySelector('#authorInput').value
+            var content = document.querySelector('#contentInput').value
+            var image = document.querySelector('#imageInput').value
+
+            // 유효성 검증
+            // 필수값 처리를 해야 하는 경우에는 해당 값이 빈값이면 return 
+            if(title === '' || author === '' || content === '' ){
+                alert('제목, 작성자, 내용을 모두 입력해주세요.')
+                return 
+            }else{
+
+                // 저장할 객체 만들기 
+                var newPost = {
+                    id: Date.now(),  // 현재 시간을 가져오기 (#[TODO✅]이걸 사용하는 법을 퀴즈로 내야 함) 
+                    title: title, 
+                    author: author, 
+                    content: content, 
+                    image: image || 'https://via.placeholder.com/400x200', // (#[✅TODO] 이건 image URL 이 잘못 되었을 때를 대비?  )
+                    createdAt: new Date().toISOString(),  // (#[✅TODO] Date.now 로 하면 안 되나? )
+                    views: 0,
+                }
+    
+                // newPost를 목록 가장 위에 보이도록 정렬
+                // 1) 기존 post 가져오기 
+                var savedPosts = localStorage.getItem('posts');
+                var posts = savedPosts ? JSON.parse(savedPosts) : []
+    
+                // 2) 기존 post 의 맨 앞에 new post 넣기 
+                posts.unshift(newPost)
+    
+                // 저장
+                localStorage.setItem('posts', JSON.stringify(posts))
+    
+                // alert 
+                alert('게시글이 저장되었습니다.')
+    
+                // ✅ 이게 왜 이동이 되는거죠?
+                location.href = './listPage.html'
+            }
+
+
+
+        })
+
+
+    </script>
+
+</body>
+
+
+
+
+</html>
