@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>상세 페이지</h1>
+
+    <h2 id="postTitle">
+        </h1>
+        <div class="post-meta">
+            <span id="postAuthor"></span>
+            <span id="postDate"></span>
+            <span id="postViews"></span>
+        </div>
+
+        <!-- [#✅TODO] 이미지가 안 들어올 것 임. 이미지 들어오는 거 보완 -->
+        <img id="postImage" class="post-image" alt="">
+
+        <div id="postContent" class="post-content"></div>
+
+        <div>
+            <button id="listBtn">목록으로</button>
+            <button id="editBtn">수정</button>
+            <button id="deleteBtn">삭제</button>
+        </div>
+
+
+        <script>
+            var search = location.search;  // "?id=1234567890"
+            var postId = search.split('=')[1];  // "1234567890"
+
+            var savedPosts = localStorage.getItem('posts')
+            var posts = savedPosts ? JSON.parse(savedPosts) : []
+
+            // 현재 게시글 항목 초기화 
+            var currentPost = null
+            var currentPostIndex = -1;
+
+            for (var i = 0; i < posts.length; i++){
+                if(posts[i].id = Number(postId)){
+                    currentPost = posts[i];
+                    currentPostIndex = i;
+                    break
+                }
+            }
+
+            if(!currentPost){
+                alert('게시글을 찾을 수 없습니다.')
+                location.href = 'list.html'
+            }
+
+            currentPost.views = currentPost.view + 1; // [✅TODO] 조회수 업데이트 하는 조각 기능을 실습으로!!!
+            posts[currentPostIndex] = currentPost;
+            localStorage.setItem('posts', JSON.stringify(posts))  // [✅TODO] 왜 여기에서 다시 저장 ❓
+
+            // 바인딩
+            document.querySelector('#postTitle').textContent = currentPost.title
+            document.querySelector('#postAuthor').textContent = `작성자: ${currentPost.author}`
+            document.querySelector('#postDate').textContent = `작성일: ${currentPost.createdAt.split('T')[0]}`
+            document.querySelector('#postViews').textContent = `조회수: ${currentPost.views}`
+            document.querySelector('#postImage').src = currentPost.image;
+            document.querySelector('#postContent').textContent = currentPost.content;
+
+            // 목록 가기 버튼
+            var listBtn = document.querySelector('#listBtn');
+            listBtn.addEventListener('click', function() {
+                location.href = 'list.html'
+            })
+            
+            // 수정 버튼
+            var editBtn = document.querySelector('#editBtn');
+            editBtn.addEventListener('click', function() {
+                location.href = `list.html?id=${postId}`
+            })
+
+            // 삭제 버튼 
+            var deleteBtn = document.querySelector('#deleteBtn')
+            deleteBtn.addEventListener('click', function() {
+                var confirmDelete = confirm('정말 삭제 하시겠습니까?')  // [✅TODO] BOOLEAN 반환 (#자주 쓰나? #아니면 대체 #처음보는데)
+
+                // ✅ filter 없이 for 문으로 변경해야 함 
+                if(confirmDelete){
+                    var newPosts = posts.filter( function(p) {
+                        return p.id !== Number(postId)
+                    } )
+                }
+
+                localStorage.setItem('posts' , JSON.stringify(newPosts))
+                alert('삭제 되었습니다.')
+                location.href = 'listPage.html'
+
+            })
+
+        </script>
+
+</body>
+
+</html>

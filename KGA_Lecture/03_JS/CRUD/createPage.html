@@ -13,20 +13,25 @@
     <!-- [✅TODO] form 기본 동작 때문에 또 당함 -->
     <!-- <form action="/" method=""> -->
         <!--[✅TODO] 여기에서 label 태그의 for 속성과 input 태그의 id 속성을 매칭?  -->
-        <label for="titleInput" >제목</label>
-        <input type="text" id="titleInput" placeholder="제목을 입력하세요" >
+        <div >
 
-        <label for="authorInput" >저자</label>
-        <input type="text" id="authorInput" placeholder="글쓴이놈" >
-        
-        <label for="contentInput">내용</label>
-        <textarea id="contentInput" placeholder="내용을 입력하세요"></textarea>
-        
-        <label for="imageInput">사진</label>
-        <input type="text" id="imageInput" placeholder="내용을 입력하세요">
+            <label for="titleInput" >제목</label>
+            <input type="text" id="titleInput" placeholder="제목을 입력하세요" >
+            
+            <label for="authorInput" >저자</label>
+            <input type="text" id="authorInput" placeholder="글쓴이놈" >
+            
+            <label for="contentInput">내용</label>
+            <textarea id="contentInput" placeholder="내용을 입력하세요"></textarea>
+            
+            <label for="imageInput">사진</label>
+            <input type="text" id="imageInput" placeholder="내용을 입력하세요">
+            
+            <!-- [✅TODO] 작성완료를 눌렀을 때, 데이터를 어떻게 form 에서 끄집어 내는가? -->
+            <button type="button" id="submitBtn">작성완료</button>
+        </div>
 
-        <!-- [✅TODO] 작성완료를 눌렀을 때, 데이터를 어떻게 form 에서 끄집어 내는가? -->
-        <button type="button" id="submitBtn">작성완료</button>
+        
 
     <!-- </form> -->
 

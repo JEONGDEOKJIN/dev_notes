@@ -9,5 +9,103 @@
     
     <h1>목록 페이지</h1>
 
+    <div>
+        <button id="createBtn">글 작성</button>
+    
+        <label for="searchInput">검색</label>
+        <input id="searchInput" type="text" placeholder="검색어를 입력하세요">
+    </div>
+
+    <!-- 카드가 동적으로 추가되는 영역 -->
+    <div id="cardContainer">
+
+    </div>
+
+    <script>
+        // 로컬스토리지에서 게시글 데이터 가져오기
+        var savedPosts = localStorage.getItem('posts')
+        var posts = savedPosts ? JSON.parse(savedPosts) : []
+
+
+        function renderCards(postsArray){
+            var container = document.querySelector('#cardContainer')
+
+            // [✅TODO] 왜 필요한지 납득 필요
+            container.innerHTML = '';
+
+            if(postsArray.length === 0){
+                container.innerHTML = `<p class="empty-message" >게시글이 없습니다.</p>`
+                return
+            }
+
+            for(var i = 0; i < postsArray.length; i++){
+                var card = document.createElement('div');
+                card.className = 'card'
+
+                var img = document.createElement('img')
+                img.src = postsArray[i].image; 
+                img.alt = postsArray[i].title; 
+                
+                var title = document.createElement('h3')
+                title.textContent = postsArray[i].title
+
+                var author = document.createElement('p');
+                author.textContent = '작성자: ' + postsArray[i].author
+
+                var date = document.createElement('p');
+                var dateString = postsArray[i].createdAt.split('T')[0];
+                date.textContent = '작성일: ' + dateString
+
+                var views = document.createElement('p');
+                view.textContent = '조회수: ' + postsArray[i].views;
+
+                card.appendChild(img)
+                card.appendChild(title)
+                card.appendChild(author)
+                card.appendChild(date)
+                card.appendChild(views)
+
+                // [✅TODO] 이거 의미 설명해야 함
+                card.setAttribute('data-id', postsArray[i].id)
+
+                // [✅TODO] 여기 postId 가져오는 거! 
+                // [✅TODO] event 가 무엇에 의해 담기는지 
+                card.addEventListener('click', function(event){
+                    var postId = event.currentTarget.getAttribute('data-id')
+                    location.href = `detail.html?id=${postId}` // [✅TODO] 커리큘럼 확인
+                })
+
+                container.appendChild(card)
+
+            }
+
+            // 목록이 로드되면, 업데이트된 posts 를 렌더
+            window.onload = function() {
+                renderCards(posts)
+            }
+
+            // 글작성 클릭시, 작성 페이지 이동
+            var createBtn = document.querySelector('#createBtn');
+            createBtn.addEventListener('click', function(){
+                location.href = 'create.html'
+            })
+
+            // 검색 기능 [✅TODO] 이 부분 다시 확인 
+            var searchInput = document.querySelector('#searchInput')
+            searchInput.addEventListener('input' , function(event){
+                var keyword = event.currentTarget.value.toLowerCase();
+
+                var filtered = posts.filter(function(post) {
+                    return post.title.toLowerCase().indexOf(keyword) !== -1 || 
+                    post.title.toLowerCase().indexOf(keyword) !== -1 ;
+                })
+
+                renderCards(filtered)
+            })
+        }
+    
+    </script>
 </body>
+
+
 </html>

@@ -95,34 +95,34 @@
     var posts = savedPosts ? JSON.parse(savedPosts) : [];
     
     // TODO 3
-    var post = null;
-    var postIndex = -1;
+    var currentPost = null;
+    var currentPostIndex = -1;
     
     for (var i = 0; i < posts.length; i++) {
       if (posts[i].id === Number(postId)) {
-        post = posts[i];
-        postIndex = i;
+        currentPost = posts[i];
+        currentPostIndex = i;
         break;
       }
     }
     
-    if (!post) {
+    if (!currentPost) {
       alert('게시글을 찾을 수 없습니다.');
       location.href = 'list.html';
     }
     
     // TODO 4
-    post.views = post.views + 1;
-    posts[postIndex] = post;
+    currentPost.views = currentPost.views + 1;
+    posts[currentPostIndex] = currentPost;
     localStorage.setItem('posts', JSON.stringify(posts));
     
     // TODO 5
-    document.querySelector('#postTitle').textContent = post.title;
-    document.querySelector('#postAuthor').textContent = '작성자: ' + post.author;
-    document.querySelector('#postDate').textContent = '작성일: ' + post.createdAt.split('T')[0];
-    document.querySelector('#postViews').textContent = '조회수: ' + post.views;
-    document.querySelector('#postImage').src = post.image;
-    document.querySelector('#postContent').textContent = post.content;
+    document.querySelector('#postTitle').textContent = currentPost.title;
+    document.querySelector('#postAuthor').textContent = '작성자: ' + currentPost.author;
+    document.querySelector('#postDate').textContent = '작성일: ' + currentPost.createdAt.split('T')[0];
+    document.querySelector('#postViews').textContent = '조회수: ' + currentPost.views;
+    document.querySelector('#postImage').src = currentPost.image;
+    document.querySelector('#postContent').textContent = currentPost.content;
     
     // TODO 6
     var listBtn = document.querySelector('#listBtn');
