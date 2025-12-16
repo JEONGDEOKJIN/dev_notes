@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="sidebar" >메뉴</div>
+    <div class="map" id="map-container" >
+        <img src="/map?x=0&y=0" id="map-image">
+        <button onclick="moveRight" > 오른쪽 </button>
+    <p id="region-info" >현재: 서울(x=0)</p>
+    </div>
+
+    <script>
+        var currentX = 0;
+        function moveRight(){
+            currentX += 100;
+            
+            // XMLHttpRequest 객체 생성 
+            var xhr = new XMLHttpRequest();
+
+            // 요청 설정
+            xhr.open('GET' , '/api/map-title?x=' + currentX + '&y=0', true)
+            
+            // 응답 처리 
+            // 네트워크 헤더가 응답을 받으면 -> readyState 값을 변경하고 -> 그러면, 4,3,2,1 이렇게 변경 (#✅ # node 로 4계층 통신 하면 더 쉽게 이해될 것 같아 )
+            xhr.onreadystatechange = function(){
+                // readyState 4 = 완료 && status 200 = 성공
+                
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    // XML 파싱
+                    var xml = xhr.responseXML
+
+                    // xml 에서 데이터 추출 
+                        // 마크업 중 imageUrl 을 찾고 -> 중복된 것 중 첫 번째 요소([0])를 찾고 -> 해당 마크업의 contents를 가져온다. 
+                        // 가져올 때 '배열' 인 이유는, 중복된 다른 요소가 더 있을 수 있어서. 
+                    var imageUrl = xml.getElementsByTagName('imageUrl')[0].textContent
+                
+                    var region = xml.getElementsByName('region')[0].textContent
+
+                    // 이미지 업데이트
+                    document.getElementById('map-image').src = imageUrl
+                    
+                    // 지역 정보 업데이트 
+                    document.getElementById('region-info').textContent = '현재 :' + region + '(x= '+currentX +')' 
+                
+                }
+            }
+        
+            // 요청 전송    
+        xhr.send()
+        }
+
+        
+    </script>
+
+    
+</body>
+</html>

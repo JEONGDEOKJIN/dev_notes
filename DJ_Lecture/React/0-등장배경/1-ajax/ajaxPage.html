@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="sidebar">메뉴</div>
+    <div class="map" id="map-container">
+        <img src="/map?x=0&y=0" id="map-image"/>
+        <button onclick="moveRight()">→ 오른쪽</button>
+        <p id="region-info">현재: 서울 (x=0)</p>
+    </div>
+
+    <script>
+        let currentX = 0;
+
+        function moveRight(){
+            currentX += 100;
+
+            // XMLHttpRequest 객체 생성 (AJAX 원조 방식)
+            var xhr = new XMLHttpRequest();
+
+            // 요청 설정 (GET 방식, 비동기)
+            xhr.open('GET', '/api/map-tile?x=' + currentX + '&y=0', true);
+
+            // 응답 처리
+            xhr.onreadystatechange = function() {
+                // readyState 4 = 완료, status 200 = 성공
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // XML 파싱 (원조 AJAX 방식!)
+                    var xml = xhr.responseXML;
+
+                    // XML에서 데이터 추출
+                    var imageUrl = xml.getElementsByTagName('imageUrl')[0].textContent;
+                    var region = xml.getElementsByTagName('region')[0].textContent;
+
+                    // 이미지 업데이트
+                    document.getElementById('map-image').src = imageUrl;
+
+                    // 지역 정보 업데이트
+                    document.getElementById('region-info').textContent =
+                        '현재: ' + region + ' (x=' + currentX + ')';
+
+                    console.log('서버 응답 (XML):', xhr.responseText);
+                }
+            };
+
+            // 요청 전송
+            xhr.send();
+        }
+    </script>
+
+</body>
+</html>
